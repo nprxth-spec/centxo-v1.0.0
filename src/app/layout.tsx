@@ -6,31 +6,9 @@ import { AdAccountProvider } from '@/contexts/AdAccountContext';
 import { ThemeProvider } from '@/components/theme-provider';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { ThemeColorProvider } from '@/contexts/ThemeColorContext';
-import { Inter, Outfit, Sarabun } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({
-    subsets: ['latin'],
-    variable: '--font-inter',
-    display: 'swap',
-    fallback: ['system-ui', 'arial', 'sans-serif'],
-});
-
-const outfit = Outfit({
-    subsets: ['latin'],
-    variable: '--font-outfit',
-    display: 'swap',
-    fallback: ['system-ui', 'arial', 'sans-serif'],
-});
-
-const sarabun = Sarabun({
-    weight: ['300', '400', '500', '600', '700'],
-    subsets: ['latin', 'thai'],
-    variable: '--font-sarabun',
-    display: 'swap',
-    fallback: ['system-ui', 'arial', 'sans-serif'],
-});
-
+// System fonts - no network fetch during build (fixes ETIMEDOUT in restricted environments)
 const BASE_URL =
     process.env.NEXT_PUBLIC_APP_URL ||
     process.env.NEXTAUTH_URL ||
@@ -54,7 +32,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`min-h-screen bg-background text-foreground antialiased font-sans ${inter.variable} ${outfit.variable} ${sarabun.variable}`}>
+            <body className="min-h-screen bg-background text-foreground antialiased font-sans">
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
