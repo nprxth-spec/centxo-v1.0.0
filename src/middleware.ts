@@ -2,11 +2,20 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+// Public paths - must be accessible without login (required for Google OAuth verification)
+const PUBLIC_PATHS = ["/", "/privacy", "/terms", "/login", "/signup", "/data-deletion", "/policy"];
+
 export async function middleware(req: NextRequest) {
+    const { pathname } = req.nextUrl;
+
+    // 0. Public paths - allow unauthenticated access (homepage, privacy, terms, etc.)
+    if (PUBLIC_PATHS.includes(pathname) || pathname.startsWith("/privacy") || pathname.startsWith("/terms")) {
+        return NextResponse.next();
+    }
+
     const token = await getToken({ req });
     const isAuth = !!token;
     const isSuperAdmin = token?.role === "SUPER_ADMIN";
-    const { pathname } = req.nextUrl;
 
     // 1. Admin Login Page
     if (pathname === "/admin/login") {
@@ -52,6 +61,15 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
     matcher: [
+        "/",
+        "/privacy",
+        "/privacy/:path*",
+        "/terms",
+        "/terms/:path*",
+        "/login",
+        "/signup",
+        "/data-deletion",
+        "/policy",
         "/accounts",
         "/campaigns",
         "/google-sheets-export",
