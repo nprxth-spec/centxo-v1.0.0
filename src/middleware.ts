@@ -59,9 +59,10 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
 }
 
+// IMPORTANT: Do NOT include "/" in matcher - homepage must be publicly accessible for Google OAuth verification.
+// When path is not in matcher, middleware does not run and request passes through to the page.
 export const config = {
     matcher: [
-        "/",
         "/privacy",
         "/privacy/:path*",
         "/terms",

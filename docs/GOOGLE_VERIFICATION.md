@@ -59,3 +59,15 @@ The homepage includes an "About Centxo" section describing the app's functionali
 - You must **redeploy** after adding the env variable
 - The verification meta tag is only added when `GOOGLE_SITE_VERIFICATION` is set
 - Ensure your production URL is `https://centxo.com` (not localhost)
+
+## Troubleshooting: "Homepage is behind a login page"
+
+If Google still reports this after deployment:
+
+1. **Check hosting redirects**: Ensure your hosting (Vercel, Plesk, nginx, etc.) does NOT redirect `/` to `/login`. The root path must serve the landing page.
+
+2. **Check www vs non-www**: If OAuth Console has `https://centxo.com`, ensure `https://centxo.com` (not www) serves the landing page. If you use www, set OAuth Console to `https://www.centxo.com`.
+
+3. **Clear CDN cache**: If using Cloudflare or similar, purge cache for centxo.com so Google sees fresh content.
+
+4. **Verify locally**: Visit https://centxo.com in incognito (logged out) - you should see the landing page with "Purpose of this application" and "Privacy Policy" links, NOT a login form.

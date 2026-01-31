@@ -11,10 +11,19 @@ const TERMS_URL = `${BASE_URL.replace(/\/$/, "")}/terms`;
 /**
  * Server-rendered section for Google OAuth verification.
  * Uses exact phrasing Google looks for: "purpose of your app", "Privacy Policy"
+ * noscript fallback for crawlers that don't execute JavaScript
  */
 export function LandingPurposeSection() {
   return (
     <article id="app-purpose" className="mb-10">
+      {/* noscript: Crawlers without JS still see purpose & privacy */}
+      <noscript>
+        <div style={{ padding: 16, marginBottom: 16, background: "#f5f5f5", border: "1px solid #ddd" }}>
+          <h2>Purpose of this application</h2>
+          <p>Centxo is a Facebook/Meta ads management application. The purpose of this application is to help businesses manage multiple ad accounts, create and optimize campaigns, export ad data to Google Sheets, and automate ad performance with AI.</p>
+          <p><strong>Privacy Policy:</strong> <a href={PRIVACY_URL}>Privacy Policy</a></p>
+        </div>
+      </noscript>
       {/* Google OAuth: Purpose + Privacy - plain text first for crawlers */}
       <section
         className="max-w-3xl mx-auto mb-6 px-4 py-6 rounded-xl bg-card border-2 border-primary/20"
