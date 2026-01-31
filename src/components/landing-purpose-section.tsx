@@ -39,6 +39,9 @@ export function LandingPurposeSection() {
           automate ad performance with AI. We provide a unified interface to
           manage Facebook advertising efficiently.
         </p>
+        <p className="text-sm text-muted-foreground mb-4">
+          To use this app, sign in with Google or Facebook. Click &quot;Get Started&quot; below to access the dashboard.
+        </p>
         <p className="text-base font-medium text-foreground mb-2">
           Privacy Policy:{" "}
           <Link
