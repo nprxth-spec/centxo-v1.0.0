@@ -5,9 +5,9 @@ import Link from "next/link";
 import { LandingFooter } from "@/components/landing-footer";
 import { LandingFooterLinks } from "@/components/landing-footer-links";
 
-/** OAuth Console requires exact match - always use production URL */
-const PRIVACY_URL = "https://www.centxo.com/privacy";
-const TERMS_URL = "https://www.centxo.com/terms";
+/** Use relative paths - work on any domain, clickable links */
+const PRIVACY_URL = "/privacy";
+const TERMS_URL = "/terms";
 
 export default async function LandingLayout({
   children,

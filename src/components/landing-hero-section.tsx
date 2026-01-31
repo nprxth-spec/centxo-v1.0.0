@@ -1,12 +1,7 @@
-import Link from "next/link";
-
-/** OAuth Console requires exact match */
-const PRIVACY_URL = "https://www.centxo.com/privacy";
-const TERMS_URL = "https://www.centxo.com/terms";
-
 /**
  * Server-rendered hero section for Google OAuth verification.
  * Uses plain English - no translations - for global review team.
+ * Privacy/Terms use <a> tags for clickable links.
  */
 export function LandingHeroSection() {
   return (
@@ -23,24 +18,18 @@ export function LandingHeroSection() {
         business efficiently with AI-powered tools.
       </p>
       <p className="text-base text-foreground mb-4">
-        We use your Google data (email, name) to authenticate your identity and
-        create your account. Sign in with Google or Facebook to get started.
+        Centxo uses your Google account information to provide a seamless login
+        experience and sync your business data safely.
       </p>
       <p className="text-sm text-muted-foreground">
         By using this app you agree to our{" "}
-        <Link
-          href={PRIVACY_URL}
-          className="text-primary font-medium underline hover:no-underline"
-        >
+        <a href="/privacy" className="text-primary font-medium underline hover:opacity-80">
           Privacy Policy
-        </Link>{" "}
+        </a>{" "}
         and{" "}
-        <Link
-          href={TERMS_URL}
-          className="text-primary font-medium underline hover:no-underline"
-        >
+        <a href="/terms" className="text-primary font-medium underline hover:opacity-80">
           Terms of Service
-        </Link>
+        </a>
         .
       </p>
     </section>

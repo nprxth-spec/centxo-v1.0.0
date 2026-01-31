@@ -8,9 +8,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-/** OAuth Console requires exact match */
-const PRIVACY_URL = "https://www.centxo.com/privacy";
-const TERMS_URL = "https://www.centxo.com/terms";
+/** Clickable links - relative paths */
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -77,9 +75,9 @@ export function LandingPageClient() {
                     </div>
                     <p className="text-sm text-muted-foreground">
                         {t('landing.cta.agree', 'By using this app you agree to our')}{' '}
-                        <Link href={PRIVACY_URL} className="text-primary hover:underline font-medium">Privacy Policy</Link>
+                        <Link href="/privacy" className="text-primary hover:underline font-medium">Privacy Policy</Link>
                         {' '}{t('landing.cta.and', 'and')}{' '}
-                        <Link href={TERMS_URL} className="text-primary hover:underline font-medium">Terms of Service</Link>.
+                        <Link href="/terms" className="text-primary hover:underline font-medium">Terms of Service</Link>.
                     </p>
                 </motion.div>
             </div>

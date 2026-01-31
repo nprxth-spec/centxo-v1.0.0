@@ -29,6 +29,10 @@ export default function PrivacyPage() {
             advertising business. We respect your privacy and are committed to
             protecting your personal data.
           </p>
+          <p className="text-muted-foreground leading-relaxed mt-4 font-medium">
+            We use Google OAuth to authenticate users. We do not share personal
+            data with third parties.
+          </p>
         </section>
 
         <section>
@@ -119,7 +123,16 @@ export default function PrivacyPage() {
             </p>
             <ul className="list-none space-y-1">
               <li className="font-medium">
-                Email:{" "}
+                Support:{" "}
+                <a
+                  href="mailto:nprxth@gmail.com"
+                  className="text-primary underline hover:no-underline"
+                >
+                  nprxth@gmail.com
+                </a>
+              </li>
+              <li className="font-medium">
+                Privacy:{" "}
                 <a
                   href="mailto:privacy@centxo.com"
                   className="text-primary underline hover:no-underline"

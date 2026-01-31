@@ -80,6 +80,7 @@ export default function TermsPage() {
                     <div className="bg-muted p-6 rounded-lg">
                         <p className="text-muted-foreground mb-2">{t('legal.terms.contact.desc')}</p>
                         <ul className="list-none space-y-1">
+                            <li className="font-medium">Support: nprxth@gmail.com</li>
                             <li className="font-medium">Email: support@centxo.com</li>
                             <li className="font-medium">Address: Bangkok, Thailand</li>
                         </ul>

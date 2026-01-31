@@ -18,13 +18,13 @@ export function LandingFooter({ footerLinks }: { footerLinks: React.ReactNode })
             &copy; {new Date().getFullYear()} Centxo. All rights reserved.
           </p>
           <p className="text-sm text-foreground">
-            Contact:{" "}
+            Support:{" "}
             <a
-              href="mailto:support@centxo.com"
+              href="mailto:nprxth@gmail.com"
               className="underline hover:opacity-80"
               style={{ color: "hsl(var(--primary))" }}
             >
-              support@centxo.com
+              nprxth@gmail.com
             </a>
             {" · "}
             <a

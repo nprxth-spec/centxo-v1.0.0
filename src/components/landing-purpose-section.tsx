@@ -1,9 +1,4 @@
-import Link from "next/link";
-
-/** OAuth Console requires exact match - always use production URL */
-const OAUTH_BASE = "https://www.centxo.com";
-const PRIVACY_URL = `${OAUTH_BASE}/privacy`;
-const TERMS_URL = `${OAUTH_BASE}/terms`;
+/** Use relative paths for clickable links */
 
 /**
  * Server-rendered section for Google OAuth verification.
@@ -20,8 +15,8 @@ export async function LandingPurposeSection() {
         <div style={{ padding: 16, marginBottom: 16, background: "#f5f5f5", border: "1px solid #ddd" }}>
           <h2>Purpose of this application</h2>
           <p>Centxo is a Facebook/Meta ads management tool. We use your Google data to authenticate your identity and manage your ad account access.</p>
-          <p><strong>Privacy Policy:</strong> <a href={PRIVACY_URL}>{PRIVACY_URL}</a></p>
-          <p><strong>Terms of Service:</strong> <a href={TERMS_URL}>{TERMS_URL}</a></p>
+          <p><strong>Privacy Policy:</strong> <a href="/privacy">https://www.centxo.com/privacy</a></p>
+          <p><strong>Terms of Service:</strong> <a href="/terms">https://www.centxo.com/terms</a></p>
         </div>
       </noscript>
       {/* Google OAuth: Purpose + Privacy - server-rendered, visible without login */}
@@ -46,28 +41,19 @@ export async function LandingPurposeSection() {
         </p>
         <p className="text-base font-medium text-foreground mb-2">
           Privacy Policy:{" "}
-          <Link
-            href={PRIVACY_URL}
-            className="text-primary font-semibold underline break-all"
-          >
-            {PRIVACY_URL}
-          </Link>
+          <a href="/privacy" className="text-primary font-semibold underline break-all">
+            https://www.centxo.com/privacy
+          </a>
         </p>
         <p className="text-sm text-foreground">
           Read our{" "}
-          <Link
-            href={PRIVACY_URL}
-            className="text-primary font-semibold underline hover:no-underline"
-          >
+          <a href="/privacy" className="text-primary font-semibold underline hover:opacity-80">
             Privacy Policy
-          </Link>{" "}
+          </a>{" "}
           and{" "}
-          <Link
-            href={TERMS_URL}
-            className="text-primary font-semibold underline hover:no-underline"
-          >
+          <a href="/terms" className="text-primary font-semibold underline hover:opacity-80">
             Terms of Service
-          </Link>
+          </a>
           .
         </p>
       </section>

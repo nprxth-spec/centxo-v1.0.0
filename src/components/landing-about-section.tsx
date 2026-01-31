@@ -16,9 +16,22 @@ export function LandingAboutSection() {
       <p className="text-base text-foreground leading-relaxed mb-6">
         <strong>Centxo</strong> integrates with your Google account to
         authenticate your identity and streamline Facebook/Meta ad campaign
-        management. We use your Google email and name to create your account
-        and personalize your experience.
+        management. Centxo uses your Google account information to provide a
+        seamless login experience and sync your business data safely. We use
+        your Google email and name to create your account and personalize your
+        experience.
       </p>
+
+      <div className="mb-6 p-4 rounded-lg bg-primary/5 border border-primary/20">
+        <h3 className="text-lg font-semibold text-foreground mb-2">
+          Security &amp; Privacy
+        </h3>
+        <p className="text-base text-foreground leading-relaxed">
+          Centxo uses Google OAuth for secure login and follows Google&apos;s
+          data safety standards. We do not share your personal data with third
+          parties.
+        </p>
+      </div>
 
       <h3 className="text-xl font-semibold text-foreground mb-4">
         Key Features – How It Works
