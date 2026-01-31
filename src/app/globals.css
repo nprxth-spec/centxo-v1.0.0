@@ -42,6 +42,23 @@
     --ring: 215 75% 50%;
 
     --radius: 0.75rem;
+
+    /* Sidebar - required by tailwind.config */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 230 25% 15%;
+    --sidebar-primary: 215 75% 50%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 220 20% 92%;
+    --sidebar-accent-foreground: 230 25% 15%;
+    --sidebar-border: 220 15% 90%;
+    --sidebar-ring: 215 75% 50%;
+
+    /* Chart colors */
+    --chart-1: 215 75% 50%;
+    --chart-2: 280 65% 60%;
+    --chart-3: 200 75% 55%;
+    --chart-4: 30 80% 55%;
+    --chart-5: 340 75% 55%;
   }
 
   .dark {
@@ -75,6 +92,23 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+
+    /* Sidebar - dark mode */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 222 47% 11%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 240 4.9% 83.9%;
+
+    /* Chart colors - dark mode */
+    --chart-1: 217 91% 60%;
+    --chart-2: 280 65% 65%;
+    --chart-3: 200 75% 60%;
+    --chart-4: 30 80% 60%;
+    --chart-5: 340 75% 60%;
   }
 }
 
