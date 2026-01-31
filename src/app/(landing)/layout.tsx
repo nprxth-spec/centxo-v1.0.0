@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import Link from "next/link";
 import { LandingFooter } from "@/components/landing-footer";
+import { LandingFooterLinks } from "@/components/landing-footer-links";
 
 // Base URL - must match Google OAuth Console (Privacy Policy URL exactly)
 const BASE_URL =
@@ -41,7 +42,7 @@ export default function LandingLayout({
         </nav>
       </header>
       <main className="flex-1">{children}</main>
-      <LandingFooter />
+      <LandingFooter footerLinks={<LandingFooterLinks />} />
     </div>
   );
 }

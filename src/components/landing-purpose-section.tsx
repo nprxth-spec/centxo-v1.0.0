@@ -19,28 +19,32 @@ export function LandingPurposeSection() {
       {/* noscript: Crawlers without JS still see purpose & privacy */}
       <noscript>
         <div style={{ padding: 16, marginBottom: 16, background: "#f5f5f5", border: "1px solid #ddd" }}>
-          <h2>Purpose of this application</h2>
-          <p>Centxo is a Facebook/Meta ads management application. The purpose of this application is to help businesses manage multiple ad accounts, create and optimize campaigns, export ad data to Google Sheets, and automate ad performance with AI.</p>
+          <h2>Welcome to Centxo</h2>
+          <p>Centxo is a Facebook/Meta ads management service. Sign in with Google or Facebook to manage your advertising data through Centxo.</p>
           <p><strong>Privacy Policy:</strong> <a href={PRIVACY_URL}>{PRIVACY_URL}</a></p>
+          <p><strong>Terms of Service:</strong> <a href={TERMS_URL}>{TERMS_URL}</a></p>
         </div>
       </noscript>
-      {/* Google OAuth: Purpose + Privacy - plain text first for crawlers */}
+      {/* Google OAuth: Welcome + Purpose + Privacy - server-rendered, visible without login */}
       <section
         className="max-w-3xl mx-auto mb-6 px-4 py-6 rounded-xl bg-card border-2 border-primary/20"
-        aria-label="Application purpose and privacy policy"
+        aria-label="Welcome and application purpose"
       >
-        <h1 className="text-2xl font-bold text-foreground mb-4">
-          Purpose of this application
+        <h1 className="text-3xl font-bold text-foreground mb-4">
+          Welcome to Centxo
         </h1>
-        <p className="text-base text-foreground leading-relaxed mb-4">
-          Centxo is a Facebook/Meta ads management application. The purpose of
-          this application is to help businesses manage multiple ad accounts,
-          create and optimize campaigns, export ad data to Google Sheets, and
-          automate ad performance with AI. We provide a unified interface to
-          manage Facebook advertising efficiently.
+        <p className="text-lg text-foreground leading-relaxed mb-4">
+          Centxo is a Facebook/Meta ads management service. This website helps
+          businesses manage multiple ad accounts, create and optimize campaigns,
+          export ad data to Google Sheets, and automate ad performance with AI.
+        </p>
+        <p className="text-base font-medium text-foreground mb-4">
+          Sign in with Google or Facebook to manage your advertising data through Centxo.
+          Click &quot;Get Started&quot; below to access the dashboard.
         </p>
         <p className="text-sm text-muted-foreground mb-4">
-          To use this app, sign in with Google or Facebook. Click &quot;Get Started&quot; below to access the dashboard.
+          Purpose of this application: To provide a unified interface for managing
+          Facebook advertising efficiently.
         </p>
         <p className="text-base font-medium text-foreground mb-2">
           Privacy Policy:{" "}
