@@ -17,12 +17,20 @@ export default async function LandingLayout({
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* GOOGLE OAUTH: Purpose + Privacy - FIRST content, absolute URLs, plain <a> tags */}
-      <div className="w-full bg-blue-600 text-white py-4 px-4 text-center border-b-4 border-blue-800">
-        <h1 className="text-lg md:text-xl font-bold mb-2">Purpose of this application</h1>
-        <p className="text-sm md:text-base mb-3 max-w-3xl mx-auto">
-          Centxo is a Facebook and Meta ads management platform. We help businesses manage multiple ad accounts, create and optimize campaigns, and export data to Google Sheets. We use Google Sign-In for authentication.
-        </p>
+      {/* GOOGLE OAUTH: Purpose + Privacy - FIRST content, detailed explanation */}
+      <div className="w-full bg-blue-600 text-white py-5 px-4 text-center border-b-4 border-blue-800">
+        <h1 className="text-xl md:text-2xl font-bold mb-3">Purpose of this application</h1>
+        <div className="max-w-4xl mx-auto space-y-2 text-left md:text-center mb-4">
+          <p className="text-sm md:text-base">
+            <strong>Centxo</strong> is a Facebook and Meta ads management platform. Our purpose is to help businesses, advertisers, and marketing agencies manage their Facebook advertising operations more efficiently.
+          </p>
+          <p className="text-sm md:text-base">
+            <strong>What Centxo does:</strong> Manage multiple Facebook ad accounts from one dashboard; create and optimize ad campaigns with AI assistance; track performance metrics (ROAS, CTR, conversions); export data to Google Sheets; automate campaign rules and budgets; generate reports.
+          </p>
+          <p className="text-sm md:text-base">
+            <strong>Why we use Google Sign-In:</strong> We collect your email and name solely for account creation and authentication. We do not access Google Ads, Gmail, or other Google services. Your data is not shared with third parties.
+          </p>
+        </div>
         <p className="text-base md:text-lg font-bold">
           Privacy Policy:{" "}
           <a href="https://www.centxo.com/privacy" className="underline text-white hover:opacity-90">
@@ -57,11 +65,19 @@ export default async function LandingLayout({
         </nav>
       </header>
       <main className="flex-1">
-        {/* Google OAuth: Above-fold purpose - visible without scroll, server-rendered */}
-        <div className="w-full bg-primary/5 border-b border-primary/10 py-3 px-4 text-center">
-          <p className="text-sm md:text-base text-foreground font-medium max-w-3xl mx-auto">
-            <strong>Centxo</strong> is a Facebook/Meta ads management tool. We use your Google data to authenticate your identity and manage your ad account access.
-          </p>
+        {/* Purpose summary - visible without scroll */}
+        <div className="w-full bg-slate-100 dark:bg-slate-900 border-b py-4 px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-lg font-bold text-foreground mb-2">Application Purpose (Centxo)</h2>
+            <p className="text-sm text-foreground leading-relaxed mb-2">
+              Centxo is a professional platform for managing Facebook and Meta advertising. We help businesses manage multiple ad accounts, create campaigns, optimize ad spend, track ROAS and CTR, export to Google Sheets, and automate rules. We use Google Sign-In only for authentication (email, name)—we do not access other Google data or share your information.
+            </p>
+            <p className="text-xs text-muted-foreground">
+              <a href="https://www.centxo.com/privacy" className="text-blue-600 dark:text-blue-400 underline">Privacy Policy</a>
+              {" · "}
+              <a href="https://www.centxo.com/terms" className="text-blue-600 dark:text-blue-400 underline">Terms of Service</a>
+            </p>
+          </div>
         </div>
         {children}
       </main>

@@ -12,20 +12,26 @@ export function LandingHeroSection() {
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 md:mb-6 text-foreground">
         Centxo: Facebook and Meta Ads Management Platform
       </h1>
-      <div className="mb-6 p-6 rounded-xl bg-primary/5 border-2 border-primary/30">
+      <div className="mb-6 p-6 rounded-xl bg-primary/5 border-2 border-primary/30 text-left">
         <h2 className="text-2xl font-bold text-foreground mb-4">
-          What is Centxo?
+          Purpose of Centxo – What This Application Does
         </h2>
         <p className="text-lg text-foreground mb-4 leading-relaxed">
-          Centxo is a comprehensive platform designed for Facebook and Meta advertising management.
-          Our platform helps businesses and advertisers to manage multiple Facebook ad accounts,
-          create and optimize advertising campaigns, analyze performance data, and scale their
-          advertising operations efficiently.
+          <strong>Centxo</strong> is a professional Facebook and Meta ads management platform. Our purpose is to help businesses, marketing agencies, and advertisers manage their Facebook advertising operations from a single dashboard.
         </p>
-        <p className="text-base text-foreground mb-4 leading-relaxed">
-          <strong>Key features include:</strong> Multi-account management, AI-powered campaign
-          creation and optimization, real-time performance tracking, automated reporting,
-          Google Sheets data export, and intelligent budget allocation.
+        <p className="text-base text-foreground mb-3 leading-relaxed">
+          <strong>Detailed application purpose:</strong>
+        </p>
+        <ul className="list-disc pl-6 space-y-2 text-foreground mb-4">
+          <li><strong>Multi-account management:</strong> Connect and manage multiple Facebook ad accounts in one place</li>
+          <li><strong>Campaign creation & optimization:</strong> Create ad campaigns, set budgets, and optimize with AI suggestions</li>
+          <li><strong>Performance tracking:</strong> Monitor ROAS, CTR, conversions, and spend in real time</li>
+          <li><strong>Google Sheets export:</strong> Export ad performance data to Google Sheets for custom reporting</li>
+          <li><strong>Automation rules:</strong> Set rules to pause or adjust ads based on performance (e.g., if ROAS &lt; 2.0 then pause)</li>
+          <li><strong>Bulk operations:</strong> Launch and manage hundreds of ads efficiently</li>
+        </ul>
+        <p className="text-base text-foreground leading-relaxed">
+          <strong>Who it&apos;s for:</strong> Businesses running Facebook/Meta ads, marketing agencies managing client accounts, and advertisers who need a unified tool for campaign management and reporting.
         </p>
       </div>
       <div className="mb-6 p-6 rounded-xl bg-blue-50 dark:bg-blue-950/30 border-2 border-blue-300 dark:border-blue-700">

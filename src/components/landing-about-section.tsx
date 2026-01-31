@@ -37,7 +37,7 @@ export function LandingAboutSection() {
         </p>
         <p className="text-base font-semibold text-foreground">
           Read our full{" "}
-          <a href="/privacy" className="text-primary font-bold underline hover:opacity-80">
+          <a href="https://www.centxo.com/privacy" className="text-primary font-bold underline hover:opacity-80">
             Privacy Policy
           </a>{" "}
           for complete details on data handling.
