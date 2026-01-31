@@ -1,4 +1,5 @@
 import { LandingHeroSection } from "@/components/landing-hero-section";
+import { LandingAboutSection } from "@/components/landing-about-section";
 import { LandingPurposeSection } from "@/components/landing-purpose-section";
 import { LandingPageClient } from "@/components/landing-page-client";
 
@@ -34,6 +35,9 @@ export default async function LandingPage() {
       <div className="container mx-auto px-4 sm:px-6 relative z-10 pt-12 pb-32">
         {/* Server-rendered: Hero with app description (English, for Google OAuth verification) */}
         <LandingHeroSection />
+
+        {/* Server-rendered: About Centxo + Key Features (how app uses Google data) */}
+        <LandingAboutSection />
 
         {/* Server-rendered: Purpose section + Privacy/Terms links */}
         <LandingPurposeSection />
