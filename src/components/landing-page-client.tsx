@@ -19,11 +19,8 @@ export function LandingPageClient() {
     const router = useRouter();
     const { t } = useLanguage();
 
-    useEffect(() => {
-        if (status === 'authenticated') {
-            router.push('/accounts');
-        }
-    }, [status, router]);
+    // Removed auto-redirect for Google OAuth verification
+    // Google's crawler needs to see the full landing page without redirects
 
     const container: Variants = {
         hidden: { opacity: 0 },
