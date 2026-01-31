@@ -2,13 +2,13 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// Public paths - must be accessible without login (required for Google OAuth verification)
+// Public paths - NOT protected by auth. Accessible without login (Google OAuth verification)
 const PUBLIC_PATHS = ["/", "/privacy", "/terms", "/login", "/signup", "/data-deletion", "/policy"];
 
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
 
-    // 0. Public paths - allow unauthenticated access (homepage, privacy, terms, etc.)
+    // 0. Public paths - allow unauthenticated access. /, /privacy, /terms must NOT require login
     if (PUBLIC_PATHS.includes(pathname) || pathname.startsWith("/privacy") || pathname.startsWith("/terms")) {
         return NextResponse.next();
     }
@@ -59,8 +59,8 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
 }
 
-// IMPORTANT: Do NOT include "/" in matcher - homepage must be publicly accessible for Google OAuth verification.
-// When path is not in matcher, middleware does not run and request passes through to the page.
+// IMPORTANT: "/" is NOT in matcher - homepage passes through without middleware (public).
+// /privacy and /terms ARE in matcher - middleware runs, checks PUBLIC_PATHS, allows access (no login required).
 export const config = {
     matcher: [
         "/privacy",

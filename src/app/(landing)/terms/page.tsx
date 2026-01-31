@@ -1,92 +1,85 @@
-"use client";
+import Link from "next/link";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useLanguage } from "@/contexts/LanguageContext";
+export const metadata = {
+  title: "Terms of Service - Centxo",
+  description: "Terms of Service for Centxo - Facebook and Meta ads management platform.",
+};
 
+/**
+ * Terms of Service page - publicly accessible, no login required.
+ * Basic terms for Google OAuth verification.
+ */
 export default function TermsPage() {
-    const { t } = useLanguage();
+  return (
+    <div className="container mx-auto py-12 px-4 max-w-4xl">
+      <h1 className="text-4xl font-bold mb-8 text-center text-foreground">
+        Terms of Service
+      </h1>
 
-    return (
-        <div className="container mx-auto py-12 px-4 max-w-4xl">
-            <h1 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                {t('legal.terms.title')}
-            </h1>
+      <div className="space-y-6 prose prose-slate dark:prose-invert max-w-none">
+        <section>
+          <h2 className="text-xl font-semibold mb-2 text-foreground">
+            1. Agreement
+          </h2>
+          <p className="text-foreground leading-relaxed">
+            By accessing or using Centxo (&quot;Service&quot;), you agree to be
+            bound by these Terms of Service. If you disagree with any part of the
+            terms, you may not access the Service.
+          </p>
+        </section>
 
-            <div className="space-y-8">
-                <section>
-                    <h2 className="text-2xl font-semibold mb-4 text-primary">{t('legal.terms.agreement.title')}</h2>
-                    <p className="text-muted-foreground leading-relaxed">
-                        {t('legal.terms.agreement.desc')}
-                    </p>
-                </section>
+        <section>
+          <h2 className="text-xl font-semibold mb-2 text-foreground">
+            2. Service Description
+          </h2>
+          <p className="text-foreground leading-relaxed mb-2">
+            Centxo provides Facebook and Meta ads management tools, including:
+          </p>
+          <ul className="list-disc pl-6 space-y-1 text-foreground">
+            <li>Campaign creation and management</li>
+            <li>Multi-account ad management</li>
+            <li>Google Sheets export</li>
+            <li>AI-powered optimization</li>
+          </ul>
+        </section>
 
-                <section>
-                    <h2 className="text-2xl font-semibold mb-4 text-primary">{t('legal.terms.service.title')}</h2>
-                    <p className="text-muted-foreground leading-relaxed mb-4">
-                        {t('legal.terms.service.desc')}
-                    </p>
-                    <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                        <li>{t('legal.terms.service.list1')}</li>
-                        <li>{t('legal.terms.service.list2')}</li>
-                        <li>{t('legal.terms.service.list3')}</li>
-                        <li>{t('legal.terms.service.list4')}</li>
-                    </ul>
-                </section>
+        <section>
+          <h2 className="text-xl font-semibold mb-2 text-foreground">
+            3. Account & Authentication
+          </h2>
+          <p className="text-foreground leading-relaxed">
+            You may sign in with Google or Facebook. We use your email and name
+            solely for authentication and account creation. You are responsible
+            for maintaining the security of your account.
+          </p>
+        </section>
 
-                <section>
-                    <h2 className="text-2xl font-semibold mb-4 text-primary">{t('legal.terms.account.title')}</h2>
-                    <p className="text-muted-foreground leading-relaxed">
-                        {t('legal.terms.account.desc')}
-                    </p>
-                </section>
+        <section>
+          <h2 className="text-xl font-semibold mb-2 text-foreground">
+            4. Contact
+          </h2>
+          <p className="text-foreground leading-relaxed">
+            For support, contact{" "}
+            <a
+              href="mailto:nprxth@gmail.com"
+              className="text-blue-600 dark:text-blue-400 underline hover:no-underline"
+            >
+              nprxth@gmail.com
+            </a>
+            . Address: Bangkok, Thailand.
+          </p>
+        </section>
 
-                <section>
-                    <h2 className="text-2xl font-semibold mb-4 text-primary">{t('legal.terms.fb.title')}</h2>
-                    <p className="text-muted-foreground leading-relaxed">
-                        {t('legal.terms.fb.desc')}
-                    </p>
-                </section>
-
-                <section>
-                    <h2 className="text-2xl font-semibold mb-4 text-primary">{t('legal.terms.google.title')}</h2>
-                    <p className="text-muted-foreground leading-relaxed">
-                        {t('legal.terms.google.desc')}
-                    </p>
-                </section>
-
-                <section>
-                    <h2 className="text-2xl font-semibold mb-4 text-primary">{t('legal.terms.subs.title')}</h2>
-                    <p className="text-muted-foreground leading-relaxed">
-                        {t('legal.terms.subs.desc')}
-                    </p>
-                </section>
-
-                <section>
-                    <h2 className="text-2xl font-semibold mb-4 text-primary">{t('legal.terms.data.title')}</h2>
-                    <p className="text-muted-foreground leading-relaxed">
-                        {t('legal.terms.data.desc')}
-                    </p>
-                </section>
-
-                <section>
-                    <h2 className="text-2xl font-semibold mb-4 text-primary">{t('legal.terms.liability.title')}</h2>
-                    <p className="text-muted-foreground leading-relaxed">
-                        {t('legal.terms.liability.desc')}
-                    </p>
-                </section>
-
-                <section>
-                    <h2 className="text-2xl font-semibold mb-4 text-primary">{t('legal.terms.contact.title')}</h2>
-                    <div className="bg-muted p-6 rounded-lg">
-                        <p className="text-muted-foreground mb-2">{t('legal.terms.contact.desc')}</p>
-                        <ul className="list-none space-y-1">
-                            <li className="font-medium">Support: nprxth@gmail.com</li>
-                            <li className="font-medium">Email: support@centxo.com</li>
-                            <li className="font-medium">Address: Bangkok, Thailand</li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
-        </div>
-    );
+        <p className="text-sm text-muted-foreground pt-4">
+          <a href="/" className="text-blue-600 dark:text-blue-400 underline">
+            ← Back to Home
+          </a>
+          {" · "}
+          <a href="/privacy" className="text-blue-600 dark:text-blue-400 underline">
+            Privacy Policy
+          </a>
+        </p>
+      </div>
+    </div>
+  );
 }
