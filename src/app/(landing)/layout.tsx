@@ -11,6 +11,12 @@ export default function LandingLayout({
 }) {
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Top bar: Privacy Policy & Terms - First visible content for Google verification */}
+      <div className="w-full bg-muted/50 border-b py-2 px-4 text-center text-sm">
+        <Link href="/privacy" className="text-primary font-medium hover:underline mx-2">Privacy Policy</Link>
+        <span className="text-muted-foreground">|</span>
+        <Link href="/terms" className="text-primary font-medium hover:underline mx-2">Terms of Service</Link>
+      </div>
       <header className="px-4 lg:px-6 h-16 flex items-center sticky top-0 z-20">
         <Logo />
         <nav className="ml-auto flex gap-4 sm:gap-6 items-center">

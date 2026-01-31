@@ -52,15 +52,25 @@ export default function LandingPage() {
                 <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
             </div>
 
-            <div className="container mx-auto px-4 sm:px-6 relative z-10 pt-20 pb-32">
+            <div className="container mx-auto px-4 sm:px-6 relative z-10 pt-12 pb-32">
 
-                {/* App Purpose - Explicit section for Google verification */}
-                <section className="text-center max-w-3xl mx-auto mb-8 px-4" aria-label="Application purpose">
-                    <h2 className="text-xl font-semibold text-foreground mb-3">{t('landing.aboutTitle', 'About Centxo - Application Purpose')}</h2>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        {t('landing.purpose', 'Centxo is a Facebook/Meta ads management platform. Our purpose is to help businesses manage multiple ad accounts, create and optimize campaigns, export ad data to Google Sheets, and automate ad performance with AI. We provide a unified interface to manage Facebook advertising efficiently.')}
-                    </p>
-                </section>
+                {/* Application Purpose - First main content, required for Google OAuth verification */}
+                <article id="app-purpose">
+                    <section className="max-w-3xl mx-auto mb-10 px-4 py-6 rounded-xl bg-card/80 border" aria-label="Application purpose">
+                        <h1 className="text-2xl font-bold text-foreground mb-4">
+                            {t('landing.purposeTitle', 'Application Purpose')}
+                        </h1>
+                        <p className="text-base text-foreground leading-relaxed mb-4">
+                            {t('landing.purpose', 'Centxo is a Facebook/Meta ads management platform. Our purpose is to help businesses manage multiple ad accounts, create and optimize campaigns, export ad data to Google Sheets, and automate ad performance with AI. We provide a unified interface to manage Facebook advertising efficiently.')}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                            {t('landing.purposeFooter', 'Read our')}{' '}
+                            <Link href="/privacy" className="text-primary font-medium hover:underline">Privacy Policy</Link>
+                            {' '}{t('landing.purposeFooterAnd', 'and')}{' '}
+                            <Link href="/terms" className="text-primary font-medium hover:underline">Terms of Service</Link>.
+                        </p>
+                    </section>
+                </article>
 
                 {/* Hero Text */}
                 <div className="text-center max-w-4xl mx-auto mb-12 md:mb-20">
