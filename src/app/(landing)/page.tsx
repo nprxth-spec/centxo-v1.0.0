@@ -3,19 +3,17 @@ import { LandingPurposeSection } from "@/components/landing-purpose-section";
 import { LandingPageClient } from "@/components/landing-page-client";
 
 async function getBaseUrl() {
+  const prod = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || "https://www.centxo.com").replace(/\/$/, "");
+  if (prod && !prod.includes("localhost")) return prod;
   try {
     const h = await headers();
     const host = h.get("host") || h.get("x-forwarded-host");
     const proto = h.get("x-forwarded-proto") || "https";
-    if (host) return `${proto}://${host}`.replace(/\/$/, "");
+    if (host && !host.includes("localhost")) return `${proto}://${host}`.replace(/\/$/, "");
   } catch {
     /* ignore */
   }
-  return (
-    process.env.NEXT_PUBLIC_APP_URL ||
-    process.env.NEXTAUTH_URL ||
-    "https://www.centxo.com"
-  ).replace(/\/$/, "");
+  return "https://www.centxo.com";
 }
 
 export async function generateMetadata() {

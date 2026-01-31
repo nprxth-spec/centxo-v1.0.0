@@ -12,7 +12,7 @@ import './globals.css';
 const BASE_URL =
     process.env.NEXT_PUBLIC_APP_URL ||
     process.env.NEXTAUTH_URL ||
-    "https://centxo.com";
+    "https://www.centxo.com";
 
 export const metadata: Metadata = {
     title: 'Centxo - Advanced Ad Management',

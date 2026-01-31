@@ -1,30 +1,29 @@
 # Google App Verification - centxo.com
 
-## ⚠️ CRITICAL: URL Must Match OAuth Console Exactly
+## ⚠️ CRITICAL: Use www.centxo.com (Google specifies this URL)
 
-Google requires the **Privacy Policy link href to match EXACTLY** the URL you entered in the OAuth consent screen. Use **absolute URLs** (e.g. `https://centxo.com/privacy`).
+Google requires the **Privacy Policy link href to match EXACTLY** the URL you entered in the OAuth consent screen. Use **absolute URLs**.
 
 **Production env vars** (set in Vercel/hosting):
 ```
-NEXT_PUBLIC_APP_URL=https://centxo.com
-# OR
-NEXTAUTH_URL=https://centxo.com
+NEXT_PUBLIC_APP_URL=https://www.centxo.com
+NEXTAUTH_URL=https://www.centxo.com
 ```
 
-Use `https://centxo.com` (no trailing slash) if your OAuth Console has:
-- Homepage: `https://centxo.com`
-- Privacy Policy: `https://centxo.com/privacy`
+**OAuth Console settings** (must match exactly):
+- Homepage URL: `https://www.centxo.com`
+- Privacy Policy URL: `https://www.centxo.com/privacy`
 
-If you use `www`, set `https://www.centxo.com` instead.
+**WWW vs Non-WWW**: `vercel.json` redirects `centxo.com` → `www.centxo.com` so both show the same content.
 
 ## 1. Purpose of App ✅
 The homepage includes an "About Centxo" section describing the app's functionality (Facebook/Meta ads management).
 
 ## 2. Privacy Policy Link ✅
 - **Top bar**: Privacy Policy | Terms of Service (first visible content)
-- **Purpose section**: Dedicated block + inline "Read our Privacy Policy and Terms of Service"
 - **Header**: Privacy Policy, Terms of Service
-- **Footer**: Privacy Policy, Terms, Data Deletion
+- **Above-fold purpose bar**: Centxo description + Google data usage
+- **Footer (bottom row)**: "Privacy Policy" | "Terms of Service" - last row at bottom of every page
 - All links use absolute URLs matching OAuth Console
 
 ## 3. Verify Ownership of centxo.com
@@ -70,4 +69,14 @@ If Google still reports this after deployment:
 
 3. **Clear CDN cache**: If using Cloudflare or similar, purge cache for centxo.com so Google sees fresh content.
 
-4. **Verify locally**: Visit https://centxo.com in incognito (logged out) - you should see the landing page with "Purpose of this application" and "Privacy Policy" links, NOT a login form.
+4. **Verify locally**: Visit https://www.centxo.com in incognito (logged out) - you should see:
+   - Above-fold purpose text: "Centxo is a Facebook/Meta ads management tool..."
+   - "Privacy Policy" and "Terms of Service" links in top bar, header, and footer (bottom row)
+   - NOT a login form or blank page
+
+## Pre-Submit Checklist
+
+- [ ] Landing page: Clear description of what the app does (Facebook/Meta ads management)
+- [ ] Footer: "Privacy Policy" and "Terms of Service" links visible at bottom
+- [ ] Incognito test: Open https://www.centxo.com in incognito - see purpose + privacy links without login
+- [ ] OAuth Console: Privacy Policy URL = `https://www.centxo.com/privacy`

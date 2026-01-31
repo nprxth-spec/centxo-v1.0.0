@@ -465,7 +465,7 @@ export async function POST(request: NextRequest) {
     try {
       console.log('🧊 Creating Messenger ice breakers...');
       const iceBreakerResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/facebook/ice-breakers`,
+        `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.centxo.com'}/api/facebook/ice-breakers`,
         {
           method: 'POST',
           headers: {

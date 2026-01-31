@@ -7,19 +7,17 @@ import { LandingFooter } from "@/components/landing-footer";
 import { LandingFooterLinks } from "@/components/landing-footer-links";
 
 async function getBaseUrl() {
+  const prod = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || "https://www.centxo.com").replace(/\/$/, "");
+  if (prod && !prod.includes("localhost")) return prod;
   try {
     const h = await headers();
     const host = h.get("host") || h.get("x-forwarded-host");
     const proto = h.get("x-forwarded-proto") || "https";
-    if (host) return `${proto}://${host}`.replace(/\/$/, "");
+    if (host && !host.includes("localhost")) return `${proto}://${host}`.replace(/\/$/, "");
   } catch {
     /* ignore */
   }
-  return (
-    process.env.NEXT_PUBLIC_APP_URL ||
-    process.env.NEXTAUTH_URL ||
-    "https://www.centxo.com"
-  ).replace(/\/$/, "");
+  return "https://www.centxo.com";
 }
 
 export default async function LandingLayout({
@@ -54,7 +52,15 @@ export default async function LandingLayout({
           <ThemeToggle />
         </nav>
       </header>
-      <main className="flex-1">{children}</main>
+      <main className="flex-1">
+        {/* Google OAuth: Above-fold purpose - visible without scroll, server-rendered */}
+        <div className="w-full bg-primary/5 border-b border-primary/10 py-3 px-4 text-center">
+          <p className="text-sm md:text-base text-foreground font-medium max-w-3xl mx-auto">
+            <strong>Centxo</strong> is a Facebook/Meta ads management tool. We use your Google data to authenticate your identity and manage your ad account access.
+          </p>
+        </div>
+        {children}
+      </main>
       <LandingFooter footerLinks={<LandingFooterLinks />} />
     </div>
   );

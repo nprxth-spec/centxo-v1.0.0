@@ -2,23 +2,21 @@ import Link from "next/link";
 import { headers } from "next/headers";
 
 /**
- * Get base URL from request - matches www.centxo.com or centxo.com for Google OAuth
- * Privacy Policy href must match OAuth Console exactly (www vs non-www)
+ * Base URL for OAuth links - always use production domain (never localhost).
+ * Privacy Policy href must match OAuth Console exactly (https://www.centxo.com)
  */
 async function getBaseUrl() {
+  const prod = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || "https://www.centxo.com").replace(/\/$/, "");
+  if (prod && !prod.includes("localhost")) return prod;
   try {
     const h = await headers();
     const host = h.get("host") || h.get("x-forwarded-host");
     const proto = h.get("x-forwarded-proto") || "https";
-    if (host) return `${proto}://${host}`.replace(/\/$/, "");
+    if (host && !host.includes("localhost")) return `${proto}://${host}`.replace(/\/$/, "");
   } catch {
     /* ignore */
   }
-  return (
-    process.env.NEXT_PUBLIC_APP_URL ||
-    process.env.NEXTAUTH_URL ||
-    "https://www.centxo.com"
-  ).replace(/\/$/, "");
+  return "https://www.centxo.com";
 }
 
 /**
@@ -38,7 +36,7 @@ export async function LandingPurposeSection() {
       <noscript>
         <div style={{ padding: 16, marginBottom: 16, background: "#f5f5f5", border: "1px solid #ddd" }}>
           <h2>Purpose of this application</h2>
-          <p>Centxo is a Facebook/Meta ads management application. The purpose of this application is to help businesses manage multiple ad accounts, create and optimize campaigns, export ad data to Google Sheets, and automate ad performance with AI. We provide a unified interface to manage Facebook advertising efficiently.</p>
+          <p>Centxo is a Facebook/Meta ads management tool. We use your Google data to authenticate your identity and manage your ad account access.</p>
           <p><strong>Privacy Policy:</strong> <a href={PRIVACY_URL}>{PRIVACY_URL}</a></p>
           <p><strong>Terms of Service:</strong> <a href={TERMS_URL}>{TERMS_URL}</a></p>
         </div>
@@ -48,15 +46,18 @@ export async function LandingPurposeSection() {
         className="max-w-3xl mx-auto mb-6 px-4 py-6 rounded-xl bg-card border-2 border-primary/20"
         aria-label="Application purpose"
       >
-        <h1 className="text-2xl font-bold text-foreground mb-4">
+        <h1 className="text-3xl font-bold text-foreground mb-4">
           Purpose of this application
         </h1>
+        <p className="text-lg text-foreground leading-relaxed mb-4">
+          Centxo is a Facebook/Meta ads management tool. This application helps
+          businesses manage multiple ad accounts, create and optimize campaigns,
+          export ad data to Google Sheets, and automate ad performance with AI.
+          We provide a unified interface to manage Facebook advertising efficiently.
+        </p>
         <p className="text-base text-foreground leading-relaxed mb-4">
-          Centxo is a Facebook/Meta ads management application. The purpose of
-          this application is to help businesses manage multiple ad accounts,
-          create and optimize campaigns, export ad data to Google Sheets, and
-          automate ad performance with AI. We provide a unified interface to
-          manage Facebook advertising efficiently.
+          We use your Google data to authenticate your identity and manage your
+          ad account access. Sign in with Google or Facebook to get started.
         </p>
         <p className="text-base font-medium text-foreground mb-2">
           Privacy Policy:{" "}

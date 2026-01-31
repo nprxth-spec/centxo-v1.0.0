@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "centxo.com" }],
+      "destination": "https://www.centxo.com/:path*",
+      "permanent": true
+    }
+  ]
+}

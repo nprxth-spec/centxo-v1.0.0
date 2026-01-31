@@ -32,8 +32,9 @@ export async function GET(request: NextRequest) {
     const adAccountIds = adAccountIdsParam.split(',').filter(Boolean);
     const base =
       process.env.NEXTAUTH_URL ||
+      process.env.NEXT_PUBLIC_APP_URL ||
       (typeof process.env.VERCEL_URL === 'string' ? `https://${process.env.VERCEL_URL}` : null) ||
-      'http://localhost:4000';
+      'https://www.centxo.com';
 
     const dateParams =
       startDate && endDate
