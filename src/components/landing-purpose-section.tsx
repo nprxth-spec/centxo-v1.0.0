@@ -21,7 +21,7 @@ export function LandingPurposeSection() {
         <div style={{ padding: 16, marginBottom: 16, background: "#f5f5f5", border: "1px solid #ddd" }}>
           <h2>Purpose of this application</h2>
           <p>Centxo is a Facebook/Meta ads management application. The purpose of this application is to help businesses manage multiple ad accounts, create and optimize campaigns, export ad data to Google Sheets, and automate ad performance with AI.</p>
-          <p><strong>Privacy Policy:</strong> <a href={PRIVACY_URL}>Privacy Policy</a></p>
+          <p><strong>Privacy Policy:</strong> <a href={PRIVACY_URL}>{PRIVACY_URL}</a></p>
         </div>
       </noscript>
       {/* Google OAuth: Purpose + Privacy - plain text first for crawlers */}
@@ -43,9 +43,9 @@ export function LandingPurposeSection() {
           Privacy Policy:{" "}
           <Link
             href={PRIVACY_URL}
-            className="text-primary font-semibold underline"
+            className="text-primary font-semibold underline break-all"
           >
-            Privacy Policy
+            {PRIVACY_URL}
           </Link>
         </p>
         <p className="text-sm text-muted-foreground">
