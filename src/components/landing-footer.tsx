@@ -4,6 +4,11 @@ import Link from "next/link";
 import { LanguageToggle } from "@/components/language-toggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+// Must match Google OAuth Console - use absolute URL for Privacy Policy
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://centxo.com";
+const PRIVACY_URL = `${BASE_URL.replace(/\/$/, "")}/privacy`;
+const TERMS_URL = `${BASE_URL.replace(/\/$/, "")}/terms`;
+
 export function LandingFooter() {
     const { t } = useLanguage();
 
@@ -13,10 +18,10 @@ export function LandingFooter() {
                 &copy; {new Date().getFullYear()} Centxo. All rights reserved.
             </p>
             <nav className="sm:ml-auto flex gap-4 sm:gap-6 items-center">
-                <Link href="/terms" className="text-xs hover:underline underline-offset-4">
+                <Link href={TERMS_URL} className="text-xs hover:underline underline-offset-4">
                     {t('landing.footer.terms')}
                 </Link>
-                <Link href="/privacy" className="text-xs hover:underline underline-offset-4">
+                <Link href={PRIVACY_URL} className="text-xs hover:underline underline-offset-4">
                     {t('landing.footer.privacy')}
                 </Link>
                 <Link href="/data-deletion" className="text-xs hover:underline underline-offset-4">

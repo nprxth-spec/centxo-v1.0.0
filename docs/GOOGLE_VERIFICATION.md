@@ -1,12 +1,31 @@
 # Google App Verification - centxo.com
 
+## ⚠️ CRITICAL: URL Must Match OAuth Console Exactly
+
+Google requires the **Privacy Policy link href to match EXACTLY** the URL you entered in the OAuth consent screen. Use **absolute URLs** (e.g. `https://centxo.com/privacy`).
+
+**Production env vars** (set in Vercel/hosting):
+```
+NEXT_PUBLIC_APP_URL=https://centxo.com
+# OR
+NEXTAUTH_URL=https://centxo.com
+```
+
+Use `https://centxo.com` (no trailing slash) if your OAuth Console has:
+- Homepage: `https://centxo.com`
+- Privacy Policy: `https://centxo.com/privacy`
+
+If you use `www`, set `https://www.centxo.com` instead.
+
 ## 1. Purpose of App ✅
-The homepage now includes an explicit "About Centxo - Application Purpose" section at the top explaining that Centxo is a Facebook/Meta ads management platform.
+The homepage includes an "About Centxo" section describing the app's functionality (Facebook/Meta ads management).
 
 ## 2. Privacy Policy Link ✅
-- **Header**: Privacy Policy and Terms of Service links in the top navigation bar
-- **Hero section**: "By using this app you agree to our Privacy Policy and Terms of Service" with inline links
-- **Footer**: Privacy Policy, Terms, Data Deletion links
+- **Top bar**: Privacy Policy | Terms of Service (first visible content)
+- **Purpose section**: Dedicated block + inline "Read our Privacy Policy and Terms of Service"
+- **Header**: Privacy Policy, Terms of Service
+- **Footer**: Privacy Policy, Terms, Data Deletion
+- All links use absolute URLs matching OAuth Console
 
 ## 3. Verify Ownership of centxo.com
 

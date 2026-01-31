@@ -7,6 +7,11 @@ import {
     BrainCircuit, Command, MessageCircle, ArrowRight
 } from "lucide-react";
 import Link from "next/link";
+
+// Must match Google OAuth Console - use absolute URL for Privacy Policy
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://centxo.com";
+const PRIVACY_URL = `${BASE_URL.replace(/\/$/, "")}/privacy`;
+const TERMS_URL = `${BASE_URL.replace(/\/$/, "")}/terms`;
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -73,9 +78,9 @@ export function LandingPageClient() {
                     </div>
                     <p className="text-sm text-muted-foreground">
                         {t('landing.cta.agree', 'By using this app you agree to our')}{' '}
-                        <Link href="/privacy" className="text-primary hover:underline font-medium">Privacy Policy</Link>
+                        <Link href={PRIVACY_URL} className="text-primary hover:underline font-medium">Privacy Policy</Link>
                         {' '}{t('landing.cta.and', 'and')}{' '}
-                        <Link href="/terms" className="text-primary hover:underline font-medium">Terms of Service</Link>.
+                        <Link href={TERMS_URL} className="text-primary hover:underline font-medium">Terms of Service</Link>.
                     </p>
                 </motion.div>
             </div>

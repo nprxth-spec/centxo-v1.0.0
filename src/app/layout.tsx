@@ -31,12 +31,20 @@ const sarabun = Sarabun({
     fallback: ['system-ui', 'arial', 'sans-serif'],
 });
 
+const BASE_URL =
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.NEXTAUTH_URL ||
+    "https://centxo.com";
+
 export const metadata: Metadata = {
     title: 'Centxo - Advanced Ad Management',
-    description: 'Centxo is a Facebook/Meta ads management platform. Manage multiple ad accounts, create campaigns, export to Google Sheets, and automate ad performance with AI.',
+    description: 'Centxo is a Facebook/Meta ads management application. Our purpose is to help businesses manage multiple ad accounts, create and optimize campaigns, export ad data to Google Sheets, and automate ad performance with AI.',
     verification: process.env.GOOGLE_SITE_VERIFICATION
         ? { google: process.env.GOOGLE_SITE_VERIFICATION }
         : undefined,
+    alternates: {
+        canonical: BASE_URL.replace(/\/$/, ""),
+    },
 };
 
 export default function RootLayout({

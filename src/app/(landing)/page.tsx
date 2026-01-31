@@ -1,6 +1,24 @@
 import { LandingPurposeSection } from "@/components/landing-purpose-section";
 import { LandingPageClient } from "@/components/landing-page-client";
 
+const BASE_URL =
+  process.env.NEXT_PUBLIC_APP_URL ||
+  process.env.NEXTAUTH_URL ||
+  "https://centxo.com";
+const PRIVACY_URL = `${BASE_URL.replace(/\/$/, "")}/privacy`;
+
+export const metadata = {
+  title: "Centxo - Facebook/Meta Ads Management",
+  description:
+    "Purpose of this application: Centxo is a Facebook/Meta ads management application. Privacy Policy: " +
+    PRIVACY_URL,
+  openGraph: {
+    title: "Centxo - Purpose & Privacy Policy",
+    description:
+      "Purpose: Facebook/Meta ads management. Privacy Policy: " + PRIVACY_URL,
+  },
+};
+
 export default function LandingPage() {
   return (
     <div className="relative overflow-hidden min-h-screen">
