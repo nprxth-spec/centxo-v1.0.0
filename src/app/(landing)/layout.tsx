@@ -2,22 +2,35 @@ import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { LandingFooter } from "@/components/landing-footer";
 import { LandingFooterLinks } from "@/components/landing-footer-links";
 
-// Base URL - must match Google OAuth Console (Privacy Policy URL exactly)
-const BASE_URL =
-  process.env.NEXT_PUBLIC_APP_URL ||
-  process.env.NEXTAUTH_URL ||
-  "https://centxo.com";
-const PRIVACY_URL = `${BASE_URL.replace(/\/$/, "")}/privacy`;
-const TERMS_URL = `${BASE_URL.replace(/\/$/, "")}/terms`;
+async function getBaseUrl() {
+  try {
+    const h = await headers();
+    const host = h.get("host") || h.get("x-forwarded-host");
+    const proto = h.get("x-forwarded-proto") || "https";
+    if (host) return `${proto}://${host}`.replace(/\/$/, "");
+  } catch {
+    /* ignore */
+  }
+  return (
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.NEXTAUTH_URL ||
+    "https://www.centxo.com"
+  ).replace(/\/$/, "");
+}
 
-export default function LandingLayout({
+export default async function LandingLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const BASE_URL = await getBaseUrl();
+  const PRIVACY_URL = `${BASE_URL}/privacy`;
+  const TERMS_URL = `${BASE_URL}/terms`;
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Top bar: Privacy Policy & Terms - First visible content for Google OAuth verification */}

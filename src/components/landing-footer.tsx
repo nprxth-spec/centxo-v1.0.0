@@ -4,8 +4,8 @@ import Link from "next/link";
 import { LanguageToggle } from "@/components/language-toggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Must match Google OAuth Console - use absolute URL for Privacy Policy
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://centxo.com";
+// Fallback for client - server-rendered footer links use dynamic URL from headers
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://www.centxo.com";
 const PRIVACY_URL = `${BASE_URL.replace(/\/$/, "")}/privacy`;
 const TERMS_URL = `${BASE_URL.replace(/\/$/, "")}/terms`;
 

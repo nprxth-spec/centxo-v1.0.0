@@ -1,26 +1,41 @@
+import { headers } from "next/headers";
 import { LandingPurposeSection } from "@/components/landing-purpose-section";
 import { LandingPageClient } from "@/components/landing-page-client";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_APP_URL ||
-  process.env.NEXTAUTH_URL ||
-  "https://centxo.com";
-const PRIVACY_URL = `${BASE_URL.replace(/\/$/, "")}/privacy`;
+async function getBaseUrl() {
+  try {
+    const h = await headers();
+    const host = h.get("host") || h.get("x-forwarded-host");
+    const proto = h.get("x-forwarded-proto") || "https";
+    if (host) return `${proto}://${host}`.replace(/\/$/, "");
+  } catch {
+    /* ignore */
+  }
+  return (
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.NEXTAUTH_URL ||
+    "https://www.centxo.com"
+  ).replace(/\/$/, "");
+}
 
-export const metadata = {
-  title: "Centxo - Facebook/Meta Ads Management",
-  description:
-    "Purpose of this application: Centxo is a Facebook/Meta ads management application. Privacy Policy: " +
-    PRIVACY_URL,
-  openGraph: {
-    title: "Centxo - Purpose & Privacy Policy",
+export async function generateMetadata() {
+  const BASE_URL = await getBaseUrl();
+  const PRIVACY_URL = `${BASE_URL}/privacy`;
+  return {
+    title: "Centxo - Facebook/Meta Ads Management",
     description:
-      "Purpose: Facebook/Meta ads management. Privacy Policy: " + PRIVACY_URL,
-  },
-};
+      "Purpose of this application: Centxo is a Facebook/Meta ads management application. Privacy Policy: " +
+      PRIVACY_URL,
+    openGraph: {
+      title: "Centxo - Purpose & Privacy Policy",
+      description:
+        "Purpose: Facebook/Meta ads management. Privacy Policy: " + PRIVACY_URL,
+    },
+  };
+}
 
 // Search "Centxo-Deploy-v2025-01-31" in page source to verify production has latest code
-export default function LandingPage() {
+export default async function LandingPage() {
   return (
     <div className="relative overflow-hidden min-h-screen" data-deploy-version="Centxo-Deploy-v2025-01-31">
       {/* Background Effects */}

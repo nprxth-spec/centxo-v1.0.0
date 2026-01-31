@@ -1,17 +1,29 @@
 import Link from "next/link";
+import { headers } from "next/headers";
 
-// Server component - no hooks, no hydration mismatch
-const BASE_URL =
-  process.env.NEXT_PUBLIC_APP_URL ||
-  process.env.NEXTAUTH_URL ||
-  "https://centxo.com";
-const PRIVACY_URL = `${BASE_URL.replace(/\/$/, "")}/privacy`;
-const TERMS_URL = `${BASE_URL.replace(/\/$/, "")}/terms`;
+async function getBaseUrl() {
+  try {
+    const h = await headers();
+    const host = h.get("host") || h.get("x-forwarded-host");
+    const proto = h.get("x-forwarded-proto") || "https";
+    if (host) return `${proto}://${host}`.replace(/\/$/, "");
+  } catch {
+    /* ignore */
+  }
+  return (
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.NEXTAUTH_URL ||
+    "https://www.centxo.com"
+  ).replace(/\/$/, "");
+}
 
 // Version marker - search "LandingFooterLinks-v" in page source to verify deployment
 const FOOTER_VERSION = "LandingFooterLinks-v2025-01-31";
 
-export function LandingFooterLinks() {
+export async function LandingFooterLinks() {
+  const BASE_URL = await getBaseUrl();
+  const PRIVACY_URL = `${BASE_URL}/privacy`;
+  const TERMS_URL = `${BASE_URL}/terms`;
   return (
     <div className="flex flex-col gap-2 items-center text-center" data-footer-version={FOOTER_VERSION}>
       <p className="text-base font-semibold text-foreground">
