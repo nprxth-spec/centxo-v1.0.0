@@ -5,9 +5,9 @@ import Link from "next/link";
 import { LandingFooter } from "@/components/landing-footer";
 import { LandingFooterLinks } from "@/components/landing-footer-links";
 
-/** Use relative paths - work on any domain, clickable links */
-const PRIVACY_URL = "/privacy";
-const TERMS_URL = "/terms";
+/** Google OAuth requires EXACT match - use absolute URLs */
+const PRIVACY_URL = "https://www.centxo.com/privacy";
+const TERMS_URL = "https://www.centxo.com/terms";
 
 export default async function LandingLayout({
   children,
@@ -17,34 +17,39 @@ export default async function LandingLayout({
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* CRITICAL: Privacy Policy - MOST PROMINENT for Google OAuth verification */}
-      <div className="w-full bg-yellow-400 dark:bg-yellow-600 border-b-2 border-yellow-600 dark:border-yellow-800 py-3 px-4 text-center">
-        <p className="text-base md:text-lg font-bold text-black dark:text-white">
-          📋 Privacy Policy: 
-          <a 
-            href={PRIVACY_URL} 
-            className="underline ml-2 text-black dark:text-white hover:opacity-80"
-          >
+      {/* GOOGLE OAUTH: Purpose + Privacy - FIRST content, absolute URLs, plain <a> tags */}
+      <div className="w-full bg-blue-600 text-white py-4 px-4 text-center border-b-4 border-blue-800">
+        <h1 className="text-lg md:text-xl font-bold mb-2">Purpose of this application</h1>
+        <p className="text-sm md:text-base mb-3 max-w-3xl mx-auto">
+          Centxo is a Facebook and Meta ads management platform. We help businesses manage multiple ad accounts, create and optimize campaigns, and export data to Google Sheets. We use Google Sign-In for authentication.
+        </p>
+        <p className="text-base md:text-lg font-bold">
+          Privacy Policy:{" "}
+          <a href="https://www.centxo.com/privacy" className="underline text-white hover:opacity-90">
             https://www.centxo.com/privacy
+          </a>
+          {" | "}
+          <a href="https://www.centxo.com/terms" className="underline text-white hover:opacity-90">
+            Terms of Service
           </a>
         </p>
       </div>
       
-      {/* Top bar: Privacy Policy & Terms - First visible content for Google OAuth verification */}
+      {/* Top bar: Privacy Policy & Terms */}
       <div className="w-full bg-muted/50 border-b py-2 px-4 text-center text-sm">
-        <Link href={PRIVACY_URL} className="text-primary font-medium hover:underline mx-2">Privacy Policy</Link>
+        <a href={PRIVACY_URL} className="text-blue-600 dark:text-blue-400 font-medium underline mx-2">Privacy Policy</a>
         <span className="text-muted-foreground">|</span>
-        <Link href={TERMS_URL} className="text-primary font-medium hover:underline mx-2">Terms of Service</Link>
+        <a href={TERMS_URL} className="text-blue-600 dark:text-blue-400 font-medium underline mx-2">Terms of Service</a>
       </div>
       <header className="px-4 lg:px-6 h-16 flex items-center sticky top-0 z-20">
         <Logo />
         <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
-          <Link href={PRIVACY_URL} className="text-sm font-medium text-primary hover:underline underline-offset-4" title="Privacy Policy">
+          <a href={PRIVACY_URL} className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline underline-offset-4" title="Privacy Policy">
             Privacy Policy
-          </Link>
-          <Link href={TERMS_URL} className="text-sm font-medium text-primary hover:underline underline-offset-4" title="Terms of Service">
+          </a>
+          <a href={TERMS_URL} className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline underline-offset-4" title="Terms of Service">
             Terms of Service
-          </Link>
+          </a>
           <Link href="/login">
             <Button size="sm" className="rounded-full px-6">Get Started</Button>
           </Link>

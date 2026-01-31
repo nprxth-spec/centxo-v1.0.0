@@ -72,9 +72,9 @@ export function LandingPageClient() {
                     </div>
                     <p className="text-sm text-muted-foreground">
                         {t('landing.cta.agree', 'By using this app you agree to our')}{' '}
-                        <Link href="/privacy" className="text-primary hover:underline font-medium">Privacy Policy</Link>
+                        <a href="https://www.centxo.com/privacy" className="text-primary hover:underline font-medium">Privacy Policy</a>
                         {' '}{t('landing.cta.and', 'and')}{' '}
-                        <Link href="/terms" className="text-primary hover:underline font-medium">Terms of Service</Link>.
+                        <a href="https://www.centxo.com/terms" className="text-primary hover:underline font-medium">Terms of Service</a>.
                     </p>
                 </motion.div>
             </div>

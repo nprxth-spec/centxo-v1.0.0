@@ -15,8 +15,8 @@ export async function LandingPurposeSection() {
         <div style={{ padding: 16, marginBottom: 16, background: "#f5f5f5", border: "1px solid #ddd" }}>
           <h2>Purpose of this application</h2>
           <p>Centxo is a Facebook/Meta ads management tool. We use your Google data to authenticate your identity and manage your ad account access.</p>
-          <p><strong>Privacy Policy:</strong> <a href="/privacy">https://www.centxo.com/privacy</a></p>
-          <p><strong>Terms of Service:</strong> <a href="/terms">https://www.centxo.com/terms</a></p>
+          <p><strong>Privacy Policy:</strong> <a href="https://www.centxo.com/privacy">https://www.centxo.com/privacy</a></p>
+          <p><strong>Terms of Service:</strong> <a href="https://www.centxo.com/terms">https://www.centxo.com/terms</a></p>
         </div>
       </noscript>
       {/* Google OAuth: Purpose + Privacy - server-rendered, visible without login */}
@@ -73,7 +73,7 @@ export async function LandingPurposeSection() {
             📄 Privacy Policy (Required Reading)
           </p>
           <a 
-            href="/privacy" 
+            href="https://www.centxo.com/privacy" 
             className="text-xl text-primary font-bold underline hover:opacity-80 break-all block mb-2"
           >
             https://www.centxo.com/privacy
@@ -86,11 +86,11 @@ export async function LandingPurposeSection() {
 
         <p className="text-base text-foreground text-center">
           By using this application, you acknowledge that you have read and agree to our{" "}
-          <a href="/privacy" className="text-primary font-bold underline hover:opacity-80 text-lg">
+          <a href="https://www.centxo.com/privacy" className="text-primary font-bold underline hover:opacity-80 text-lg">
             Privacy Policy
           </a>{" "}
           and{" "}
-          <a href="/terms" className="text-primary font-bold underline hover:opacity-80 text-lg">
+          <a href="https://www.centxo.com/terms" className="text-primary font-bold underline hover:opacity-80 text-lg">
             Terms of Service
           </a>
           .

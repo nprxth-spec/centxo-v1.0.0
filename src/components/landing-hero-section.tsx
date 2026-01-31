@@ -44,7 +44,7 @@ export function LandingHeroSection() {
           📋 Privacy Policy:
         </p>
         <a 
-          href="/privacy" 
+          href="https://www.centxo.com/privacy" 
           className="text-lg text-primary font-bold underline hover:opacity-80 break-all"
         >
           https://www.centxo.com/privacy
@@ -52,11 +52,11 @@ export function LandingHeroSection() {
       </div>
       <p className="text-base text-foreground">
         By using this application, you agree to our{" "}
-        <a href="/privacy" className="text-primary font-bold underline hover:opacity-80 text-lg">
+        <a href="https://www.centxo.com/privacy" className="text-primary font-bold underline hover:opacity-80 text-lg">
           Privacy Policy
         </a>{" "}
         and{" "}
-        <a href="/terms" className="text-primary font-bold underline hover:opacity-80 text-lg">
+        <a href="https://www.centxo.com/terms" className="text-primary font-bold underline hover:opacity-80 text-lg">
           Terms of Service
         </a>
         .
