@@ -54,6 +54,14 @@ export default function LandingPage() {
 
             <div className="container mx-auto px-4 sm:px-6 relative z-10 pt-20 pb-32">
 
+                {/* App Purpose - Explicit section for Google verification */}
+                <section className="text-center max-w-3xl mx-auto mb-8 px-4" aria-label="Application purpose">
+                    <h2 className="text-xl font-semibold text-foreground mb-3">{t('landing.aboutTitle', 'About Centxo - Application Purpose')}</h2>
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                        {t('landing.purpose', 'Centxo is a Facebook/Meta ads management platform. Our purpose is to help businesses manage multiple ad accounts, create and optimize campaigns, export ad data to Google Sheets, and automate ad performance with AI. We provide a unified interface to manage Facebook advertising efficiently.')}
+                    </p>
+                </section>
+
                 {/* Hero Text */}
                 <div className="text-center max-w-4xl mx-auto mb-12 md:mb-20">
                     <motion.div
@@ -74,12 +82,7 @@ export default function LandingPage() {
                         <p className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto px-4">
                             {t('landing.hero.subtitle')}
                         </p>
-                        <section className="max-w-2xl mx-auto px-4 mb-8 text-center" aria-label="App purpose">
-                            <p className="text-base text-muted-foreground leading-relaxed">
-                                {t('landing.purpose', 'Centxo is a Facebook/Meta ads management platform. Our purpose is to help businesses manage multiple ad accounts, create and optimize campaigns, export ad data to Google Sheets, and automate ad performance with AI. We provide a unified interface to manage Facebook advertising efficiently.')}
-                            </p>
-                        </section>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 mb-4">
                             <Link href="/login" className="w-full sm:w-auto">
                                 <Button size="lg" className="w-full sm:w-auto h-14 px-8 rounded-full text-lg shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all hover:scale-105">
                                     {t('landing.cta.start')} <ArrowRight className="ml-2 h-5 w-5" />
@@ -89,6 +92,12 @@ export default function LandingPage() {
                                 {t('landing.cta.features')}
                             </Button>
                         </div>
+                        <p className="text-sm text-muted-foreground">
+                            {t('landing.cta.agree', 'By using this app you agree to our')}{' '}
+                            <Link href="/privacy" className="text-primary hover:underline font-medium">Privacy Policy</Link>
+                            {' '}{t('landing.cta.and', 'and')}{' '}
+                            <Link href="/terms" className="text-primary hover:underline font-medium">Terms of Service</Link>.
+                        </p>
                     </motion.div>
                 </div>
 
