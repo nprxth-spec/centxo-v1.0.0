@@ -74,6 +74,11 @@ export default function LandingPage() {
                         <p className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto px-4">
                             {t('landing.hero.subtitle')}
                         </p>
+                        <section className="max-w-2xl mx-auto px-4 mb-8 text-center" aria-label="App purpose">
+                            <p className="text-base text-muted-foreground leading-relaxed">
+                                {t('landing.purpose', 'Centxo is a Facebook/Meta ads management platform. Our purpose is to help businesses manage multiple ad accounts, create and optimize campaigns, export ad data to Google Sheets, and automate ad performance with AI. We provide a unified interface to manage Facebook advertising efficiently.')}
+                            </p>
+                        </section>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
                             <Link href="/login" className="w-full sm:w-auto">
                                 <Button size="lg" className="w-full sm:w-auto h-14 px-8 rounded-full text-lg shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all hover:scale-105">

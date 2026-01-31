@@ -14,6 +14,12 @@ export default function LandingLayout({
       <header className="px-4 lg:px-6 h-16 flex items-center sticky top-0 z-20">
         <Logo />
         <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
+          <Link href="/privacy" className="text-sm font-medium hover:underline underline-offset-4">
+            Privacy Policy
+          </Link>
+          <Link href="/terms" className="text-sm font-medium hover:underline underline-offset-4">
+            Terms
+          </Link>
           <Link href="/login">
             <Button size="sm" className="rounded-full px-6">Get Started</Button>
           </Link>

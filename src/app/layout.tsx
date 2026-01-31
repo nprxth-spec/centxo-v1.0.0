@@ -33,7 +33,10 @@ const sarabun = Sarabun({
 
 export const metadata: Metadata = {
     title: 'Centxo - Advanced Ad Management',
-    description: 'Scale your advertising campaigns with AI automation',
+    description: 'Centxo is a Facebook/Meta ads management platform. Manage multiple ad accounts, create campaigns, export to Google Sheets, and automate ad performance with AI.',
+    verification: process.env.GOOGLE_SITE_VERIFICATION
+        ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+        : undefined,
 };
 
 export default function RootLayout({
