@@ -13,9 +13,12 @@ const TERMS_URL = `${BASE_URL.replace(/\/$/, "")}/terms`;
  * Uses exact phrasing Google looks for: "purpose of your app", "Privacy Policy"
  * noscript fallback for crawlers that don't execute JavaScript
  */
+// Version marker - search "Centxo-Landing-v" in page source to verify deployment
+const LANDING_VERSION = "Centxo-Landing-v2025-01-31";
+
 export function LandingPurposeSection() {
   return (
-    <article id="app-purpose" className="mb-10">
+    <article id="app-purpose" className="mb-10" data-landing-version={LANDING_VERSION}>
       {/* noscript: Crawlers without JS still see purpose & privacy */}
       <noscript>
         <div style={{ padding: 16, marginBottom: 16, background: "#f5f5f5", border: "1px solid #ddd" }}>

@@ -8,9 +8,12 @@ const BASE_URL =
 const PRIVACY_URL = `${BASE_URL.replace(/\/$/, "")}/privacy`;
 const TERMS_URL = `${BASE_URL.replace(/\/$/, "")}/terms`;
 
+// Version marker - search "LandingFooterLinks-v" in page source to verify deployment
+const FOOTER_VERSION = "LandingFooterLinks-v2025-01-31";
+
 export function LandingFooterLinks() {
   return (
-    <div className="flex flex-col gap-2 items-center text-center">
+    <div className="flex flex-col gap-2 items-center text-center" data-footer-version={FOOTER_VERSION}>
       <p className="text-base font-semibold text-foreground">
         <Link
           href={PRIVACY_URL}

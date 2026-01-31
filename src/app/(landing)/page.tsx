@@ -19,9 +19,10 @@ export const metadata = {
   },
 };
 
+// Search "Centxo-Deploy-v2025-01-31" in page source to verify production has latest code
 export default function LandingPage() {
   return (
-    <div className="relative overflow-hidden min-h-screen">
+    <div className="relative overflow-hidden min-h-screen" data-deploy-version="Centxo-Deploy-v2025-01-31">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[120px] animate-pulse" />
