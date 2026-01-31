@@ -1,3 +1,4 @@
+import { LandingHeroSection } from "@/components/landing-hero-section";
 import { LandingPurposeSection } from "@/components/landing-purpose-section";
 import { LandingPageClient } from "@/components/landing-page-client";
 
@@ -7,12 +8,13 @@ export async function generateMetadata() {
   return {
     title: "Centxo - Facebook/Meta Ads Management",
     description:
-      "Purpose of this application: Centxo is a Facebook/Meta ads management application. Privacy Policy: " +
+      "Centxo is a platform for Facebook and Meta ads management, helping users to manage multiple ad accounts, optimize campaigns, and scale their advertising. Privacy Policy: " +
       PRIVACY_URL,
     openGraph: {
-      title: "Centxo - Purpose & Privacy Policy",
+      title: "Centxo - Facebook/Meta Ads Management",
       description:
-        "Purpose: Facebook/Meta ads management. Privacy Policy: " + PRIVACY_URL,
+        "Centxo is a platform for Facebook and Meta ads management. Privacy Policy: " +
+        PRIVACY_URL,
     },
   };
 }
@@ -30,10 +32,13 @@ export default async function LandingPage() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10 pt-12 pb-32">
-        {/* Server-rendered: Application Purpose + Privacy/Terms links (required for Google OAuth verification) */}
+        {/* Server-rendered: Hero with app description (English, for Google OAuth verification) */}
+        <LandingHeroSection />
+
+        {/* Server-rendered: Purpose section + Privacy/Terms links */}
         <LandingPurposeSection />
 
-        {/* Client-rendered: Hero, CTA, Bento grid */}
+        {/* Client-rendered: CTA, Bento grid */}
         <LandingPageClient />
       </div>
     </div>
