@@ -17,6 +17,19 @@ export default async function LandingLayout({
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* CRITICAL: Privacy Policy - MOST PROMINENT for Google OAuth verification */}
+      <div className="w-full bg-yellow-400 dark:bg-yellow-600 border-b-2 border-yellow-600 dark:border-yellow-800 py-3 px-4 text-center">
+        <p className="text-base md:text-lg font-bold text-black dark:text-white">
+          📋 Privacy Policy: 
+          <a 
+            href={PRIVACY_URL} 
+            className="underline ml-2 text-black dark:text-white hover:opacity-80"
+          >
+            https://www.centxo.com/privacy
+          </a>
+        </p>
+      </div>
+      
       {/* Top bar: Privacy Policy & Terms - First visible content for Google OAuth verification */}
       <div className="w-full bg-muted/50 border-b py-2 px-4 text-center text-sm">
         <Link href={PRIVACY_URL} className="text-primary font-medium hover:underline mx-2">Privacy Policy</Link>
