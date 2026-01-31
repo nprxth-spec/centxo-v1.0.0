@@ -1,27 +1,13 @@
 import Link from "next/link";
-import { headers } from "next/headers";
 
-async function getBaseUrl() {
-  const prod = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || "https://www.centxo.com").replace(/\/$/, "");
-  if (prod && !prod.includes("localhost")) return prod;
-  try {
-    const h = await headers();
-    const host = h.get("host") || h.get("x-forwarded-host");
-    const proto = h.get("x-forwarded-proto") || "https";
-    if (host && !host.includes("localhost")) return `${proto}://${host}`.replace(/\/$/, "");
-  } catch {
-    /* ignore */
-  }
-  return "https://www.centxo.com";
-}
+/** OAuth Console requires exact match - always use production URL */
+const PRIVACY_URL = "https://www.centxo.com/privacy";
+const TERMS_URL = "https://www.centxo.com/terms";
 
 // Version marker - search "LandingFooterLinks-v" in page source to verify deployment
 const FOOTER_VERSION = "LandingFooterLinks-v2025-01-31";
 
-export async function LandingFooterLinks() {
-  const BASE_URL = await getBaseUrl();
-  const PRIVACY_URL = `${BASE_URL}/privacy`;
-  const TERMS_URL = `${BASE_URL}/terms`;
+export function LandingFooterLinks() {
   return (
     <div className="w-full" data-footer-version={FOOTER_VERSION}>
       {/* Google OAuth: Privacy Policy & Terms - last row at bottom, standard footer placement */}

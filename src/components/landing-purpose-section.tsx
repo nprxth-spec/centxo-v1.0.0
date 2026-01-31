@@ -1,23 +1,9 @@
 import Link from "next/link";
-import { headers } from "next/headers";
 
-/**
- * Base URL for OAuth links - always use production domain (never localhost).
- * Privacy Policy href must match OAuth Console exactly (https://www.centxo.com)
- */
-async function getBaseUrl() {
-  const prod = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || "https://www.centxo.com").replace(/\/$/, "");
-  if (prod && !prod.includes("localhost")) return prod;
-  try {
-    const h = await headers();
-    const host = h.get("host") || h.get("x-forwarded-host");
-    const proto = h.get("x-forwarded-proto") || "https";
-    if (host && !host.includes("localhost")) return `${proto}://${host}`.replace(/\/$/, "");
-  } catch {
-    /* ignore */
-  }
-  return "https://www.centxo.com";
-}
+/** OAuth Console requires exact match - always use production URL */
+const OAUTH_BASE = "https://www.centxo.com";
+const PRIVACY_URL = `${OAUTH_BASE}/privacy`;
+const TERMS_URL = `${OAUTH_BASE}/terms`;
 
 /**
  * Server-rendered section for Google OAuth verification.
@@ -27,9 +13,6 @@ async function getBaseUrl() {
 const LANDING_VERSION = "Centxo-Landing-v2025-01-31";
 
 export async function LandingPurposeSection() {
-  const BASE_URL = await getBaseUrl();
-  const PRIVACY_URL = `${BASE_URL}/privacy`;
-  const TERMS_URL = `${BASE_URL}/terms`;
   return (
     <article id="app-purpose" className="mb-10" data-landing-version={LANDING_VERSION}>
       {/* noscript: Crawlers without JS still see purpose & privacy */}

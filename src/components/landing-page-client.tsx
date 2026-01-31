@@ -8,10 +8,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-// Must match Google OAuth Console - use www.centxo.com (Google specifies this URL)
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://www.centxo.com";
-const PRIVACY_URL = `${BASE_URL.replace(/\/$/, "")}/privacy`;
-const TERMS_URL = `${BASE_URL.replace(/\/$/, "")}/terms`;
+/** OAuth Console requires exact match */
+const PRIVACY_URL = "https://www.centxo.com/privacy";
+const TERMS_URL = "https://www.centxo.com/terms";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

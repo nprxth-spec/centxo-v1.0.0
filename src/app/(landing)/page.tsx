@@ -1,24 +1,9 @@
-import { headers } from "next/headers";
 import { LandingPurposeSection } from "@/components/landing-purpose-section";
 import { LandingPageClient } from "@/components/landing-page-client";
 
-async function getBaseUrl() {
-  const prod = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || "https://www.centxo.com").replace(/\/$/, "");
-  if (prod && !prod.includes("localhost")) return prod;
-  try {
-    const h = await headers();
-    const host = h.get("host") || h.get("x-forwarded-host");
-    const proto = h.get("x-forwarded-proto") || "https";
-    if (host && !host.includes("localhost")) return `${proto}://${host}`.replace(/\/$/, "");
-  } catch {
-    /* ignore */
-  }
-  return "https://www.centxo.com";
-}
+const PRIVACY_URL = "https://www.centxo.com/privacy";
 
 export async function generateMetadata() {
-  const BASE_URL = await getBaseUrl();
-  const PRIVACY_URL = `${BASE_URL}/privacy`;
   return {
     title: "Centxo - Facebook/Meta Ads Management",
     description:
