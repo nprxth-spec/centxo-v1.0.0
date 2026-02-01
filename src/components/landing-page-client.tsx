@@ -1,226 +1,149 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import {
-    Sparkles, TrendingUp, Check, Globe, Activity, Rocket,
-    BrainCircuit, Command, MessageCircle, ArrowRight
+  Check, Activity, BrainCircuit, Command,
+  ArrowRight, FileSpreadsheet, Users, Megaphone
 } from "lucide-react";
 import Link from "next/link";
-
-/** Clickable links - relative paths */
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+const FEATURES = [
+  { icon: Users, titleKey: "landing.features.accounts.title", descKey: "landing.features.accounts.desc" },
+  { icon: Megaphone, titleKey: "landing.features.campaigns.title", descKey: "landing.features.campaigns.desc" },
+  { icon: Activity, titleKey: "landing.dashboard.title", descKey: "landing.dashboard.desc" },
+  { icon: BrainCircuit, titleKey: "landing.ai.title", descKey: "landing.ai.desc" },
+  { icon: FileSpreadsheet, titleKey: "landing.features.sheets.title", descKey: "landing.features.sheets.desc" },
+  { icon: Command, titleKey: "landing.auto.title", descKey: "landing.auto.desc1" },
+];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 },
+};
+
 export function LandingPageClient() {
-    const { status } = useSession();
-    const router = useRouter();
-    const { t } = useLanguage();
+  const { t } = useLanguage();
+  const scrollToFeatures = () => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
 
-    // Removed auto-redirect for Google OAuth verification
-    // Google's crawler needs to see the full landing page without redirects
-
-    const container: Variants = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.3
-            }
-        }
-    };
-
-    const item: Variants = {
-        hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50 } }
-    };
-
-    return (
-        <>
-            {/* Hero Text */}
-            <div className="text-center max-w-4xl mx-auto mb-12 md:mb-20">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary mb-8">
-                        <Sparkles className="h-4 w-4" />
-                        <span className="text-sm font-medium">{t('landing.new.aiResponse')}</span>
-                    </div>
-                    <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 md:mb-8 leading-[1.1]">
-                        {t('landing.hero.title1')}<br />
-                        <span className="bg-gradient-to-r from-primary via-purple-500 to-blue-500 bg-clip-text text-transparent">
-                            {t('landing.hero.title2')}
-                        </span>
-                    </h2>
-                    <p className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto px-4">
-                        {t('landing.hero.subtitle')}
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 mb-4">
-                        <Link href="/login" className="w-full sm:w-auto">
-                            <Button size="lg" className="w-full sm:w-auto h-14 px-8 rounded-full text-lg shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all hover:scale-105">
-                                {t('landing.cta.start')} <ArrowRight className="ml-2 h-5 w-5" />
-                            </Button>
-                        </Link>
-                        <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 rounded-full text-lg hover:bg-muted/50">
-                            {t('landing.cta.features')}
-                        </Button>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                        {t('landing.cta.agree', 'By using this app you agree to our')}{' '}
-                        <a href="https://www.centxo.com/privacy" className="text-primary hover:underline font-medium">Privacy Policy</a>
-                        {' '}{t('landing.cta.and', 'and')}{' '}
-                        <a href="https://www.centxo.com/terms" className="text-primary hover:underline font-medium">Terms of Service</a>.
-                    </p>
-                </motion.div>
-            </div>
-
-            {/* Bento Grid */}
-            <motion.div
-                variants={container}
-                initial="hidden"
-                animate="show"
-                className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4 md:gap-6 max-w-7xl mx-auto"
+  return (
+    <div className="max-w-4xl mx-auto">
+      {/* Hero */}
+      <section className="text-center py-12 md:py-16">
+        <motion.div {...fadeUp} className="space-y-5">
+          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+            {t("landing.trial.badge", "14-day free trial · No credit card")}
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground leading-[1.2]">
+            {t("landing.hero.title1")}{" "}
+            <span className="text-primary">{t("landing.hero.title2")}</span>
+          </h2>
+          <p className="text-base text-muted-foreground max-w-lg mx-auto leading-relaxed">
+            {t("landing.hero.subtitle")}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+            <Link href="/login" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:w-auto h-11 px-6 rounded-lg font-medium">
+                {t("landing.cta.start")} <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto h-11 px-6 rounded-lg font-medium"
+              onClick={scrollToFeatures}
             >
-                <motion.div variants={item} className="md:col-span-6 lg:col-span-8 row-span-2 relative group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem]" />
-                    <div className="h-full bg-card/50 backdrop-blur-sm border rounded-[2rem] p-6 md:p-8 overflow-hidden shadow-2xl relative hover:border-primary/50 transition-colors">
-                        <div className="flex justify-between items-start mb-8">
-                            <div>
-                                <div className="inline-flex p-3 rounded-2xl bg-primary/10 text-primary mb-4">
-                                    <Activity className="h-6 w-6" />
-                                </div>
-                                <h3 className="text-2xl font-bold mb-2">{t('landing.dashboard.title')}</h3>
-                                <p className="text-muted-foreground">{t('landing.dashboard.desc')}</p>
-                            </div>
-                            <span className="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-sm font-medium flex items-center gap-1">
-                                <TrendingUp className="h-3 w-3" /> +24.5%
-                            </span>
-                        </div>
-                        <div className="space-y-6">
-                            <div className="grid grid-cols-3 gap-4">
-                                <div className="p-4 rounded-2xl bg-background/80 border">
-                                    <div className="text-sm text-muted-foreground mb-1">{t('landing.dashboard.spend')}</div>
-                                    <div className="text-2xl font-bold">฿145,230</div>
-                                </div>
-                                <div className="p-4 rounded-2xl bg-background/80 border">
-                                    <div className="text-sm text-muted-foreground mb-1">{t('landing.dashboard.revenue')}</div>
-                                    <div className="text-2xl font-bold text-green-500">฿892,100</div>
-                                </div>
-                                <div className="p-4 rounded-2xl bg-background/80 border">
-                                    <div className="text-sm text-muted-foreground mb-1">{t('landing.dashboard.roas')}</div>
-                                    <div className="text-2xl font-bold text-blue-500">6.14x</div>
-                                </div>
-                            </div>
-                            <div className="h-48 w-full bg-background/50 rounded-2xl border p-4 relative flex items-end justify-between px-6 gap-2">
-                                {[40, 65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 100].map((h, i) => (
-                                    <div key={i} className="w-full bg-primary/20 rounded-t-lg relative group/bar" style={{ height: `${h}%` }}>
-                                        <div className="absolute inset-0 bg-primary/50 rounded-t-lg opacity-0 group-hover/bar:opacity-100 transition-opacity" />
-                                    </div>
-                                ))}
-                                <svg className="absolute inset-0 h-full w-full p-4 pointer-events-none" preserveAspectRatio="none">
-                                    <path d="M0,150 C20,120 40,160 60,100 S100,50 120,80 S160,20 200,40" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary opacity-50" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
+              {t("landing.cta.features")}
+            </Button>
+          </div>
+        </motion.div>
+      </section>
 
-                <motion.div variants={item} className="md:col-span-6 lg:col-span-4 relative group">
-                    <div className="h-full bg-gradient-to-br from-purple-500/5 to-blue-500/5 backdrop-blur-sm border rounded-[2rem] p-6 md:p-8 hover:border-purple-500/50 transition-colors">
-                        <div className="inline-flex p-3 rounded-2xl bg-purple-500/10 text-purple-500 mb-4">
-                            <BrainCircuit className="h-6 w-6" />
-                        </div>
-                        <h3 className="text-xl font-bold mb-2">{t('landing.ai.title')}</h3>
-                        <p className="text-sm text-muted-foreground mb-6">{t('landing.ai.desc')}</p>
-                        <div className="space-y-3">
-                            <div className="flex items-center gap-3 p-3 rounded-xl bg-background/60 border text-sm">
-                                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center">
-                                    <Check className="h-4 w-4 text-green-500" />
-                                </div>
-                                <div>
-                                    <div className="font-medium text-green-600">{t('landing.ai.budget')}</div>
-                                    <div className="text-xs text-muted-foreground">{t('landing.ai.budgetDesc')}</div>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-3 p-3 rounded-xl bg-background/60 border text-sm">
-                                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                                    <Check className="h-4 w-4 text-blue-500" />
-                                </div>
-                                <div>
-                                    <div className="font-medium text-blue-600">{t('landing.ai.audience')}</div>
-                                    <div className="text-xs text-muted-foreground">{t('landing.ai.audienceDesc')}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
+      {/* Features */}
+      <section id="features" className="py-16 scroll-mt-20">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.4 }}
+          className="text-center mb-10"
+        >
+          <h3 className="text-xl font-bold text-foreground mb-2">
+            {t("landing.features.title", "All Features Included")}
+          </h3>
+          <p className="text-sm text-muted-foreground max-w-md mx-auto">
+            {t("landing.features.subtitle", "Everything you need—available in your 14-day free trial.")}
+          </p>
+        </motion.div>
 
-                <motion.div variants={item} className="md:col-span-3 lg:col-span-4 relative group">
-                    <div className="h-full bg-card/50 backdrop-blur-sm border rounded-[2rem] p-6 md:p-8 hover:border-blue-500/50 transition-colors">
-                        <div className="inline-flex p-3 rounded-2xl bg-blue-500/10 text-blue-500 mb-4">
-                            <Globe className="h-6 w-6" />
-                        </div>
-                        <h3 className="text-xl font-bold mb-2">{t('landing.multi.title')}</h3>
-                        <p className="text-sm text-muted-foreground mb-4">{t('landing.multi.desc')}</p>
-                        <div className="flex -space-x-4">
-                            {[1, 2, 3, 4].map((i) => (
-                                <div key={i} className="w-10 h-10 rounded-full border-2 border-background bg-muted flex items-center justify-center text-xs font-semibold">
-                                    Acc
-                                </div>
-                            ))}
-                            <div className="w-10 h-10 rounded-full border-2 border-background bg-primary text-primary-foreground flex items-center justify-center text-xs">
-                                +99
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
-
-                <motion.div variants={item} className="md:col-span-3 lg:col-span-4 relative group">
-                    <div className="h-full bg-card/50 backdrop-blur-sm border rounded-[2rem] p-6 md:p-8 hover:border-orange-500/50 transition-colors">
-                        <div className="inline-flex p-3 rounded-2xl bg-orange-500/10 text-orange-500 mb-4">
-                            <Rocket className="h-6 w-6" />
-                        </div>
-                        <h3 className="text-xl font-bold mb-2">{t('landing.bulk.title')}</h3>
-                        <p className="text-sm text-muted-foreground mb-4">{t('landing.bulk.desc')}</p>
-                        <div className="grid grid-cols-2 gap-2">
-                            <div className="h-2 bg-orange-500/20 rounded-full w-full animate-pulse" />
-                            <div className="h-2 bg-orange-500/20 rounded-full w-3/4 animate-pulse delay-75" />
-                            <div className="h-2 bg-orange-500/20 rounded-full w-1/2 animate-pulse delay-150" />
-                            <div className="h-2 bg-orange-500/20 rounded-full w-full animate-pulse delay-200" />
-                        </div>
-                    </div>
-                </motion.div>
-
-                <motion.div variants={item} className="md:col-span-6 lg:col-span-4 relative group">
-                    <div className="h-full bg-card/50 backdrop-blur-sm border rounded-[2rem] p-6 md:p-8 hover:border-pink-500/50 transition-colors">
-                        <div className="inline-flex p-3 rounded-2xl bg-pink-500/10 text-pink-500 mb-4">
-                            <Command className="h-6 w-6" />
-                        </div>
-                        <h3 className="text-xl font-bold mb-2">{t('landing.auto.title')}</h3>
-                        <p className="text-sm text-muted-foreground">
-                            {t('landing.auto.desc1')}<br />
-                            {t('landing.auto.desc2')}
-                        </p>
-                    </div>
-                </motion.div>
-
-                <motion.div variants={item} className="md:col-span-6 lg:col-span-4 relative group">
-                    <div className="h-full bg-card/50 backdrop-blur-sm border rounded-[2rem] p-6 md:p-8 hover:border-cyan-500/50 transition-colors">
-                        <div className="inline-flex p-3 rounded-2xl bg-cyan-500/10 text-cyan-500 mb-4">
-                            <MessageCircle className="h-6 w-6" />
-                        </div>
-                        <h3 className="text-xl font-bold mb-2">{t('landing.bot.title')}</h3>
-                        <p className="text-sm text-muted-foreground">
-                            {t('landing.bot.desc')}
-                        </p>
-                    </div>
-                </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.4, staggerChildren: 0.04 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
+          {FEATURES.map((f, i) => (
+            <motion.div
+              key={f.titleKey}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.04, duration: 0.35 }}
+              className="p-5 rounded-xl border bg-card/50 hover:border-primary/20 hover:bg-card/80 transition-colors"
+            >
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 p-2 rounded-lg bg-muted/80">
+                  <f.icon className="h-4 w-4 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="font-semibold text-foreground text-sm mb-0.5">{t(f.titleKey)}</h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{t(f.descKey)}</p>
+                </div>
+              </div>
             </motion.div>
-        </>
-    );
+          ))}
+        </motion.div>
+      </section>
+
+      {/* Final CTA */}
+      <motion.section
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+        className="py-16 text-center"
+      >
+        <div className="rounded-xl border bg-muted/20 py-10 px-6">
+          <div className="flex flex-wrap justify-center gap-4 mb-6 text-sm text-muted-foreground">
+            <span className="flex items-center gap-1.5">
+              <Check className="h-4 w-4 text-primary flex-shrink-0" />
+              {t("landing.trial.benefit1", "All Features")}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Check className="h-4 w-4 text-primary flex-shrink-0" />
+              {t("landing.trial.benefit2", "No Credit Card")}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Check className="h-4 w-4 text-primary flex-shrink-0" />
+              {t("landing.trial.benefit3", "Cancel Anytime")}
+            </span>
+          </div>
+          <h3 className="text-lg font-bold text-foreground mb-2">
+            {t("landing.cta.final", "Ready to scale your ads?")}
+          </h3>
+          <p className="text-sm text-muted-foreground mb-6 max-w-sm mx-auto">
+            {t("landing.cta.finalDesc", "Start your 14-day free trial today.")}
+          </p>
+          <Link href="/login">
+            <Button size="lg" className="h-11 px-6 rounded-lg font-medium">
+              {t("landing.cta.start")} <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+      </motion.section>
+    </div>
+  );
 }

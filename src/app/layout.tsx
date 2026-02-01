@@ -14,14 +14,22 @@ const BASE_URL =
     process.env.NEXTAUTH_URL ||
     "https://www.centxo.com";
 
+const PRIVACY_URL = "https://www.centxo.com/privacy";
+const TERMS_URL = "https://www.centxo.com/terms";
+
 export const metadata: Metadata = {
     title: 'Centxo - Advanced Ad Management',
-    description: 'Centxo is a Facebook/Meta ads management application. Our purpose is to help businesses manage multiple ad accounts, create and optimize campaigns, export ad data to Google Sheets, and automate ad performance with AI.',
+    description: 'Centxo is a Facebook/Meta ads management application. Manage multiple ad accounts, create and optimize campaigns, export to Google Sheets. Privacy Policy: ' + PRIVACY_URL,
     verification: process.env.GOOGLE_SITE_VERIFICATION
         ? { google: process.env.GOOGLE_SITE_VERIFICATION }
         : undefined,
     alternates: {
         canonical: BASE_URL.replace(/\/$/, ""),
+    },
+    // Google OAuth: Link elements in head for crawlers
+    other: {
+        "privacy-policy": PRIVACY_URL,
+        "terms-of-service": TERMS_URL,
     },
 };
 

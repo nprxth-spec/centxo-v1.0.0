@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, AlertCircle, Sparkles } from "lucide-react";
+import { Loader2, AlertCircle, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const GoogleIcon = () => (
@@ -35,6 +35,7 @@ function LoginPageContent() {
     const [error, setError] = useState<string | null>(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showEmailForm, setShowEmailForm] = useState(false);
     const { t } = useLanguage();
 
     useEffect(() => {
@@ -82,11 +83,16 @@ function LoginPageContent() {
     };
 
     return (
-        <div className="w-full max-w-[420px]">
-            <Card className="shadow-2xl border-0 sm:border sm:rounded-3xl overflow-hidden bg-card/95 backdrop-blur-sm">
-                <CardHeader className="space-y-2 text-center pb-6 pt-8">
-                    <CardTitle className="text-2xl font-bold tracking-tight">{t('login.welcome')}</CardTitle>
-                    <CardDescription className="text-base">
+        <div className="w-full max-w-[400px]">
+            <Card className="shadow-xl border rounded-2xl overflow-hidden bg-card">
+                <CardHeader className="space-y-3 text-center pb-6 pt-10">
+                    <div className="flex justify-center">
+                        <Link href="/" className="flex items-center justify-center w-14 h-14 rounded-full bg-foreground text-background">
+                            <img src="/centxo-logo.png" alt="Centxo" className="w-8 h-8 rounded" />
+                        </Link>
+                    </div>
+                    <CardTitle className="text-xl font-bold tracking-tight text-foreground">{t('login.welcome')}</CardTitle>
+                    <CardDescription className="text-sm text-muted-foreground">
                         {t('login.subtitle')}
                     </CardDescription>
                 </CardHeader>
@@ -99,66 +105,13 @@ function LoginPageContent() {
                         </Alert>
                     )}
 
-                    {/* Email/Password Form */}
-                    <form onSubmit={handleEmailSignIn} className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                placeholder="your@email.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                disabled={loading !== null}
-                                className="h-11"
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <Label htmlFor="password">Password</Label>
-                            <Input
-                                id="password"
-                                type="password"
-                                placeholder="••••••••"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                disabled={loading !== null}
-                                className="h-11"
-                            />
-                        </div>
-
-                        <Button
-                            type="submit"
-                            disabled={loading !== null}
-                            className="w-full h-12 rounded-2xl text-base font-semibold bg-primary hover:bg-primary/90 text-white transition-all justify-center gap-3"
-                        >
-                            {loading === 'credentials' ? (
-                                <Loader2 className="h-5 w-5 animate-spin" />
-                            ) : (
-                                'Sign In'
-                            )}
-                        </Button>
-                    </form>
-
-                    {/* Divider */}
-                    <div className="relative">
-                        <div className="absolute inset-0 flex items-center">
-                            <span className="w-full border-t" />
-                        </div>
-                        <div className="relative flex justify-center text-xs uppercase">
-                            <span className="bg-card px-2 text-muted-foreground">{t('login.or')}</span>
-                        </div>
-                    </div>
-
-                    {/* OAuth: Google & Facebook */}
+                    {/* Social: Google & Facebook */}
                     <div className="space-y-3">
                         <Button
                             variant="outline"
                             disabled={loading !== null}
                             onClick={handleGoogleSignIn}
-                            className="w-full h-12 rounded-2xl text-base font-medium border-2 hover:bg-muted/50 transition-all justify-center gap-3"
+                            className="w-full h-11 rounded-xl font-medium border bg-muted hover:bg-muted/80 justify-center gap-3"
                         >
                             {loading === 'google' ? (
                                 <Loader2 className="h-5 w-5 animate-spin" />
@@ -173,7 +126,7 @@ function LoginPageContent() {
                             variant="outline"
                             disabled={loading !== null}
                             onClick={handleFacebookSignIn}
-                            className="w-full h-12 rounded-2xl text-base font-medium border-2 hover:bg-muted/50 transition-all justify-center gap-3"
+                            className="w-full h-11 rounded-xl font-medium border bg-muted/30 hover:bg-muted/50 justify-center gap-3"
                         >
                             {loading === 'facebook' ? (
                                 <Loader2 className="h-5 w-5 animate-spin" />
@@ -186,22 +139,77 @@ function LoginPageContent() {
                         </Button>
                     </div>
 
-                    <p className="text-xs text-center text-muted-foreground pt-4">
+                    {/* or */}
+                    <div className="relative py-2">
+                        <div className="absolute inset-0 flex items-center">
+                            <span className="w-full border-t" />
+                        </div>
+                        <div className="relative flex justify-center">
+                            <span className="bg-card px-3 text-sm text-muted-foreground">{t('login.or')}</span>
+                        </div>
+                    </div>
+
+                    {/* Continue with Email - button or form */}
+                    {showEmailForm ? (
+                        <form onSubmit={handleEmailSignIn} className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
+                            <div className="space-y-2">
+                                <Label htmlFor="email">Email</Label>
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    placeholder="your@email.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                    disabled={loading !== null}
+                                    className="h-11 rounded-xl"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="password">Password</Label>
+                                <Input
+                                    id="password"
+                                    type="password"
+                                    placeholder="••••••••"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    disabled={loading !== null}
+                                    className="h-11 rounded-xl"
+                                />
+                            </div>
+                            <Button
+                                type="submit"
+                                disabled={loading !== null}
+                                className="w-full h-11 rounded-xl font-medium"
+                            >
+                                {loading === 'credentials' ? (
+                                    <Loader2 className="h-5 w-5 animate-spin" />
+                                ) : (
+                                    t('login.signIn', 'Sign In')
+                                )}
+                            </Button>
+                        </form>
+                    ) : (
+                        <Button
+                            variant="outline"
+                            disabled={loading !== null}
+                            onClick={() => setShowEmailForm(true)}
+                            className="w-full h-11 rounded-xl font-medium border bg-muted/30 hover:bg-muted/50 justify-center gap-3"
+                        >
+                            <Mail className="h-5 w-5" />
+                            {t('login.continueWithEmail', 'Continue with Email')}
+                        </Button>
+                    )}
+
+                    <p className="text-xs text-center text-muted-foreground pt-2">
                         {t('login.terms')}{" "}
-                        <Link href="/terms" className="text-primary hover:underline">{t('login.termsLink')}</Link>
-                        {t('login.and')}
-                        <Link href="/privacy" className="text-primary hover:underline">{t('login.privacyLink')}</Link>
+                        <Link href="https://www.centxo.com/terms" className="text-primary hover:underline">{t('login.termsLink')}</Link>
+                        {t('login.and')}{" "}
+                        <Link href="https://www.centxo.com/privacy" className="text-primary hover:underline">{t('login.privacyLink')}</Link>
                     </p>
                 </CardContent>
             </Card>
-
-            {/* Feature highlight */}
-            <div className="mt-8 text-center">
-                <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
-                    <Sparkles className="h-4 w-4 text-primary" />
-                    <span>{t('login.footer')}</span>
-                </div>
-            </div>
         </div>
     );
 }

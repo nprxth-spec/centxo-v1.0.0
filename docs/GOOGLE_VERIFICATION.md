@@ -76,7 +76,13 @@ If Google still reports this after deployment:
 
 ## Pre-Submit Checklist
 
-- [ ] Landing page: Clear description of what the app does (Facebook/Meta ads management)
-- [ ] Footer: "Privacy Policy" and "Terms of Service" links visible at bottom
-- [ ] Incognito test: Open https://www.centxo.com in incognito - see purpose + privacy links without login
-- [ ] OAuth Console: Privacy Policy URL = `https://www.centxo.com/privacy`
+- [x] **Top bar**: Privacy Policy | Terms of Service (first visible content on every page)
+- [x] **Above-fold purpose section**: "Purpose of this Application" + "How we use Google data" + Google Sheets API + Privacy/Terms links
+- [x] **Header**: Privacy and Terms links (visible on mobile and desktop)
+- [x] **Footer**: Privacy, Terms (dedicated bottom row) + Data Deletion, Contact links
+- [x] **JSON-LD**: WebApplication schema with privacyPolicy and termsOfService
+- [x] **Privacy Policy**: Explicitly mentions Google Sign-In + Google Sheets API usage
+- [ ] **Incognito test**: Open https://www.centxo.com in incognito - see purpose + privacy links without login
+- [ ] **OAuth Console**: Homepage URL = `https://www.centxo.com`, Privacy Policy URL = `https://www.centxo.com/privacy`
+- [ ] **GOOGLE_SITE_VERIFICATION**: Set env var in Vercel for Search Console verification (optional)
+- [ ] **Video demo**: For spreadsheets scope—record screen showing login + export to Google Sheets flow (upload as unlisted YouTube)

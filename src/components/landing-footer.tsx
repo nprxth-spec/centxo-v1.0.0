@@ -1,50 +1,34 @@
 "use client";
 
-import Link from "next/link";
 import { LanguageToggle } from "@/components/language-toggle";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { LandingFooterLinks } from "@/components/landing-footer-links";
 
-export function LandingFooter({ footerLinks }: { footerLinks: React.ReactNode }) {
+export function LandingFooter() {
   const { t } = useLanguage();
 
   return (
-    <footer className="flex flex-col w-full shrink-0 border-t bg-muted/50">
-      <div className="flex flex-col gap-2 sm:flex-row sm:justify-between items-center py-6 px-4 md:px-6">
-        <div className="flex flex-col gap-1 text-center sm:text-left">
-          <p
-            className="text-sm font-medium text-foreground"
-            suppressHydrationWarning
-          >
-            &copy; {new Date().getFullYear()} Centxo. All rights reserved.
+    <footer className="w-full shrink-0 border-t bg-background">
+      <div className="container py-4 px-4 sm:px-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+          <p suppressHydrationWarning>
+            &copy; {new Date().getFullYear()} Centxo
           </p>
-          <p className="text-sm text-foreground">
-            Support:{" "}
-            <a
-              href="mailto:nprxth@gmail.com"
-              className="underline hover:opacity-80"
-              style={{ color: "hsl(var(--primary))" }}
-            >
-              nprxth@gmail.com
+          <nav className="flex flex-wrap items-center justify-center sm:justify-end gap-x-2 sm:gap-x-3 gap-y-1" aria-label="Footer">
+            <LandingFooterLinks />
+            <span className="text-muted-foreground/40">·</span>
+            <a href="https://www.centxo.com/contact" className="hover:text-foreground transition-colors">
+              Contact
             </a>
-            {" · "}
-            <a
-              href="mailto:privacy@centxo.com"
-              className="underline hover:opacity-80"
-              style={{ color: "hsl(var(--primary))" }}
-            >
-              privacy@centxo.com
+            <span className="text-muted-foreground/40">·</span>
+            <a href="https://www.centxo.com/data-deletion" className="hover:text-foreground transition-colors">
+              {t("landing.footer.deletion")}
             </a>
-          </p>
+            <span className="text-muted-foreground/40">·</span>
+            <LanguageToggle />
+          </nav>
         </div>
-        <nav className="flex gap-4 sm:gap-6 items-center">
-          <Link href="/data-deletion" className="text-sm hover:underline underline-offset-4 text-foreground">
-            {t("landing.footer.deletion")}
-          </Link>
-          <LanguageToggle />
-        </nav>
       </div>
-      {/* Google OAuth: Privacy Policy & Terms - PROMINENT, last row */}
-      {footerLinks}
     </footer>
   );
 }

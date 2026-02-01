@@ -12,16 +12,22 @@ export const metadata = {
 export default function TermsPage() {
   return (
     <div className="container mx-auto py-12 px-4 max-w-4xl">
-      <h1 className="text-4xl font-bold mb-8 text-center text-foreground">
+      <h1 className="text-4xl font-bold mb-2 text-center text-foreground">
         Terms of Service
       </h1>
+      <p className="text-center text-muted-foreground mb-8">
+        Centxo · Narongsak Srikracha
+      </p>
 
       <div className="space-y-8 prose prose-slate dark:prose-invert max-w-none">
         <div className="bg-green-50 dark:bg-green-950/30 border-2 border-green-300 dark:border-green-700 rounded-lg p-8">
-          <p className="text-lg text-foreground leading-relaxed">
+          <p className="text-lg text-foreground leading-relaxed mb-2">
             By using Centxo, you agree to these Terms of Service. We provide Facebook and Meta 
             advertising management tools. You are responsible for your account security and for 
             complying with Facebook's advertising policies.
+          </p>
+          <p className="text-base text-foreground">
+            <strong>Legal entity:</strong> Narongsak Srikracha · <strong>Tel:</strong> <a href="tel:+66803787247" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">+66 80 378 7247</a>
           </p>
         </div>
 
@@ -80,7 +86,7 @@ export default function TermsPage() {
           </h2>
           <p className="text-foreground leading-relaxed">
             Your privacy is important to us. Please review our{" "}
-            <a href="/privacy" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+            <a href="https://www.centxo.com/privacy" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
               Privacy Policy
             </a>{" "}
             to understand how we collect and use your information.
@@ -124,12 +130,16 @@ export default function TermsPage() {
         </section>
 
         <p className="text-sm text-muted-foreground pt-8 border-t mt-8">
-          <a href="/" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+          <a href="https://www.centxo.com" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
             ← Back to Home
           </a>
           {" · "}
-          <a href="/privacy" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+          <a href="https://www.centxo.com/privacy" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
             Privacy Policy
+          </a>
+          {" · "}
+          <a href="https://www.centxo.com/data-deletion" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+            Data Deletion
           </a>
         </p>
       </div>

@@ -132,9 +132,11 @@ Centxo ใช้ ads_management เพื่อ:
 - [ ] ทำครบทั้ง 4 ขั้นตอนสำหรับ **pages_read_engagement**
 - [ ] ทำครบทั้ง 4 ขั้นตอนสำหรับ **ads_management**
 - [ ] App อยู่ในโหมด Development และทดสอบ flow ครบแล้ว
-- [ ] Privacy Policy URL ครบถ้วน
-- [ ] Terms of Service (ถ้ามี) ครบถ้วน
-- [ ] App Domains และ OAuth Redirect URIs ตั้งค่าถูกต้อง
+- [ ] Privacy Policy URL: `https://www.centxo.com/privacy` (มีคำอธิบาย Facebook/Meta data + Data Deletion)
+- [ ] Terms of Service: `https://www.centxo.com/terms`
+- [ ] Data Deletion Instructions: `https://www.centxo.com/data-deletion`
+- [ ] **Data Deletion Callback URL**: `https://www.centxo.com/api/facebook/data-deletion` — ตั้งค่าใน **App Dashboard → Settings → Advanced → Data Deletion Request Callback URL** (Callback จะลบข้อมูล Facebook-linked จริงเมื่อผู้ใช้กด Send Request)
+- [ ] App Domains: `centxo.com` และ OAuth Redirect URIs: `https://www.centxo.com/api/auth/callback/facebook`
 
 ---
 

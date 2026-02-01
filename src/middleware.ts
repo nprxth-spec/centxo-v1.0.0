@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // Public paths - NOT protected by auth. Accessible without login (Google OAuth verification)
-const PUBLIC_PATHS = ["/", "/privacy", "/terms", "/login", "/signup", "/data-deletion", "/policy"];
+const PUBLIC_PATHS = ["/", "/privacy", "/terms", "/login", "/signup", "/data-deletion", "/policy", "/contact"];
 
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
@@ -59,10 +59,10 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
 }
 
-// IMPORTANT: "/" is NOT in matcher - homepage passes through without middleware (public).
-// /privacy and /terms ARE in matcher - middleware runs, checks PUBLIC_PATHS, allows access (no login required).
+// Google OAuth: "/" MUST be public - add to matcher for explicit pass-through (no redirect)
 export const config = {
     matcher: [
+        "/",
         "/privacy",
         "/privacy/:path*",
         "/terms",

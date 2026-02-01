@@ -10,6 +10,9 @@ export default function DataDeletionPage() {
             <h1 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
                 {t('legal.deletion.title')}
             </h1>
+            <p className="text-center text-muted-foreground mb-6">
+                Centxo · Narongsak Srikracha
+            </p>
 
 
             <div className="space-y-8">
@@ -53,12 +56,22 @@ export default function DataDeletionPage() {
                     </p>
                     <div className="bg-muted p-6 rounded-lg">
                         <ul className="list-none space-y-1">
-                            <li className="font-medium">Email: support@centxo.com</li>
+                            <li className="font-medium">Centxo · Narongsak Srikracha</li>
+                            <li className="font-medium">Email: <a href="mailto:nprxth@gmail.com" className="text-primary hover:underline">nprxth@gmail.com</a></li>
+                            <li className="font-medium">Tel: <a href="tel:+66803787247" className="text-primary hover:underline">+66 80 378 7247</a></li>
                             <li className="font-medium">Subject: Data Deletion Request</li>
                         </ul>
                     </div>
                 </section>
             </div>
+
+            <p className="text-sm text-muted-foreground pt-8 border-t mt-8">
+                <a href="https://www.centxo.com" className="text-primary hover:underline">← Back to Home</a>
+                {" · "}
+                <a href="https://www.centxo.com/privacy" className="text-primary hover:underline">Privacy Policy</a>
+                {" · "}
+                <a href="https://www.centxo.com/terms" className="text-primary hover:underline">Terms of Service</a>
+            </p>
         </div>
     );
 }

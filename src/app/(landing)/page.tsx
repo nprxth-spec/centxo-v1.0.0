@@ -1,15 +1,48 @@
-import { LandingHeroSection } from "@/components/landing-hero-section";
-import { LandingAboutSection } from "@/components/landing-about-section";
-import { LandingPurposeSection } from "@/components/landing-purpose-section";
 import { LandingPageClient } from "@/components/landing-page-client";
 
 const PRIVACY_URL = "https://www.centxo.com/privacy";
+
+/** JSON-LD for Google OAuth verification + SEO (phone search) */
+function LandingJsonLd() {
+  const webApp = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Centxo",
+    description: "Facebook and Meta ads management platform. We use Google Sign-In for authentication. We collect email and name solely for account management. We do not share your data with third parties.",
+    url: "https://www.centxo.com",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    privacyPolicy: "https://www.centxo.com/privacy",
+    termsOfService: "https://www.centxo.com/terms",
+  };
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Centxo",
+    legalName: "Narongsak Srikracha",
+    url: "https://www.centxo.com",
+    telephone: "+66803787247",
+    email: "nprxth@gmail.com",
+    description: "Facebook and Meta ads management platform. Manage ad accounts, campaigns, and export to Google Sheets.",
+  };
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webApp) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }} />
+    </>
+  );
+}
 
 export async function generateMetadata() {
   return {
     title: "Centxo - Facebook/Meta Ads Management Platform | Privacy Policy: www.centxo.com/privacy",
     description:
-      "Centxo is a platform for Facebook and Meta ads management. Purpose: Help businesses manage multiple ad accounts, optimize campaigns, and scale advertising. We use Google OAuth for secure authentication. Privacy Policy: https://www.centxo.com/privacy | Terms: https://www.centxo.com/terms",
+      "Centxo is a Facebook/Meta ads management platform. Manage multiple ad accounts, optimize campaigns, and scale advertising. Privacy Policy: https://www.centxo.com/privacy | Terms: https://www.centxo.com/terms",
     openGraph: {
       title: "Centxo - Facebook/Meta Ads Management | Privacy: www.centxo.com/privacy",
       description:
@@ -22,89 +55,61 @@ export async function generateMetadata() {
   };
 }
 
-// Search "Centxo-Deploy-v2025-01-31" in page source to verify production has latest code
+// Google OAuth: Force static - full HTML at build time for crawlers (no streaming)
+export const dynamic = "force-static";
+
+// Search "Centxo-Deploy-v2026-02-01" in page source to verify production has latest code
 export default async function LandingPage() {
   return (
+    <>
+      <LandingJsonLd />
     <div className="relative overflow-hidden min-h-screen" data-deploy-version="Centxo-Deploy-v2026-02-01">
       {/* NOSCRIPT: Critical content for crawlers without JavaScript */}
       <noscript>
         <div style={{
-          padding: '2rem',
+          padding: '1.5rem 2rem',
           margin: '2rem auto',
-          maxWidth: '800px',
-          backgroundColor: '#fff3cd',
-          border: '3px solid #ffc107',
-          borderRadius: '8px'
+          maxWidth: '720px',
+          backgroundColor: '#f8fafc',
+          border: '1px solid #e2e8f0',
+          borderRadius: '12px',
+          fontFamily: 'system-ui, sans-serif'
         }}>
-          <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Centxo: Facebook and Meta Ads Management Platform</h1>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Purpose of this Application</h2>
-          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '1rem' }}>
-            Centxo is a professional platform for managing Facebook and Meta advertising campaigns. 
-            We help businesses manage multiple ad accounts, create and optimize campaigns, 
-            track performance, and export data to Google Sheets.
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.75rem', color: '#0f172a' }}>Centxo: Facebook and Meta Ads Management Platform</h1>
+          <h2 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.5rem', color: '#334155' }}>Purpose of this Application</h2>
+          <p style={{ fontSize: '0.9375rem', lineHeight: 1.6, marginBottom: '0.75rem', color: '#475569' }}>
+            Centxo is a professional platform for managing Facebook and Meta advertising campaigns. We help businesses manage multiple ad accounts, create and optimize campaigns, track performance, and export data to Google Sheets.
           </p>
-          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '1rem' }}>
-            <strong>How we use Google data:</strong> When you sign in with Google, we collect your 
-            email address and name solely for authentication and account management. We do not 
-            share your data with third parties.
+          <p style={{ fontSize: '0.9375rem', lineHeight: 1.6, marginBottom: '1rem', color: '#475569' }}>
+            <strong style={{ color: '#0f172a' }}>How we use Google data:</strong> When you sign in with Google, we collect your email address and name solely for authentication and account management. We use the Google Sheets API for optional ad data export—we only write to spreadsheets you create or select. We do not share your data with third parties.
           </p>
-          <div style={{ 
-            padding: '1rem', 
-            backgroundColor: '#fff', 
-            border: '2px solid #0066cc',
-            marginTop: '1.5rem'
-          }}>
-            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
-              📋 Privacy Policy:
-            </p>
-            <a 
-              href="https://www.centxo.com/privacy" 
-              style={{ 
-                fontSize: '1.1rem', 
-                color: '#0066cc', 
-                textDecoration: 'underline',
-                display: 'block',
-                marginBottom: '1rem'
-              }}
-            >
-              https://www.centxo.com/privacy
-            </a>
-            <a 
-              href="https://www.centxo.com/terms" 
-              style={{ 
-                fontSize: '1.1rem', 
-                color: '#0066cc', 
-                textDecoration: 'underline',
-                display: 'block'
-              }}
-            >
-              https://www.centxo.com/terms
-            </a>
-          </div>
+          <p style={{ fontSize: '0.9375rem', marginTop: '1rem' }}>
+            <a href="https://www.centxo.com/privacy" style={{ color: '#2563eb', textDecoration: 'underline', marginRight: '1rem' }}>Privacy Policy</a>
+            <a href="https://www.centxo.com/terms" style={{ color: '#2563eb', textDecoration: 'underline' }}>Terms of Service</a>
+          </p>
         </div>
       </noscript>
       
-      {/* Background Effects */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-500/20 rounded-full blur-[120px] animate-pulse delay-1000" />
-        <div className="absolute top-[40%] left-[60%] w-[30%] h-[60%] bg-blue-500/10 rounded-full blur-[100px] animate-pulse delay-2000" />
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
+      {/* Background */}
+      <div className="fixed inset-0 pointer-events-none -z-10">
+        <div className="absolute inset-0 bg-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-muted/20" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10 pt-12 pb-32">
-        {/* Server-rendered: Hero with app description (English, for Google OAuth verification) */}
-        <LandingHeroSection />
+      <div className="container px-4 sm:px-6 relative z-10 pt-4 pb-16">
+        {/* Purpose - compact, server-rendered (Google OAuth) */}
+        <section id="app-purpose" className="mb-12 py-4 px-4 rounded-lg border bg-card/40 text-center max-w-2xl mx-auto" aria-label="Application purpose">
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            <strong className="text-foreground/90">Centxo</strong> is a Facebook/Meta ads management platform. We use Google Sign-In for authentication and Google Sheets API for optional ad data export—we collect only your email and name for account management and do not share your data.{" "}
+            <a href="https://www.centxo.com/privacy" className="text-primary hover:underline">Privacy</a>
+            {" · "}
+            <a href="https://www.centxo.com/terms" className="text-primary hover:underline">Terms</a>
+          </p>
+        </section>
 
-        {/* Server-rendered: About Centxo + Key Features (how app uses Google data) */}
-        <LandingAboutSection />
-
-        {/* Server-rendered: Purpose section + Privacy/Terms links */}
-        <LandingPurposeSection />
-
-        {/* Client-rendered: CTA, Bento grid */}
         <LandingPageClient />
       </div>
     </div>
+    </>
   );
 }
