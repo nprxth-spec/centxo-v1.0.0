@@ -35,11 +35,15 @@ export default function ContactPage() {
       </div>
 
       <p className="text-sm text-muted-foreground pt-8 border-t mt-8 text-center">
-        <a href="https://www.centxo.com" className="text-primary hover:underline">← Back to Home</a>
+        <a href="/" className="text-primary hover:underline">← Back to Home</a>
         {" · "}
-        <a href="https://www.centxo.com/privacy" className="text-primary hover:underline">Privacy</a>
+        <a href="/privacy" className="text-primary hover:underline">Privacy</a>
         {" · "}
-        <a href="https://www.centxo.com/terms" className="text-primary hover:underline">Terms</a>
+        <a href="/terms" className="text-primary hover:underline">Terms</a>
+        {" · "}
+        <a href="/app-permissions" className="text-primary hover:underline">App Permissions</a>
+        {" · "}
+        <a href="/data-deletion" className="text-primary hover:underline">Data Deletion</a>
       </p>
     </div>
   );

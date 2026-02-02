@@ -12,14 +12,14 @@ import './globals.css';
 const BASE_URL =
     process.env.NEXT_PUBLIC_APP_URL ||
     process.env.NEXTAUTH_URL ||
-    "https://www.centxo.com";
+    "https://centxo.online";
 
-const PRIVACY_URL = "https://www.centxo.com/privacy";
-const TERMS_URL = "https://www.centxo.com/terms";
+const PRIVACY_URL = `${BASE_URL}/privacy`;
+const TERMS_URL = `${BASE_URL}/terms`;
 
 export const metadata: Metadata = {
-    title: 'Centxo - Advanced Ad Management',
-    description: 'Centxo is a Facebook/Meta ads management application. Manage multiple ad accounts, create and optimize campaigns, export to Google Sheets. Privacy Policy: ' + PRIVACY_URL,
+    title: 'Centxo Digital Solution - Facebook/Meta Ads Management',
+    description: 'Centxo Digital Solution is a Facebook/Meta ads management application. Manage multiple ad accounts, create and optimize campaigns, export to Google Sheets. Privacy Policy: ' + PRIVACY_URL,
     verification: process.env.GOOGLE_SITE_VERIFICATION
         ? { google: process.env.GOOGLE_SITE_VERIFICATION }
         : undefined,

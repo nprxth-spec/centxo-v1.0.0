@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // Public paths - NOT protected by auth. Accessible without login (Google OAuth verification)
-const PUBLIC_PATHS = ["/", "/privacy", "/terms", "/login", "/signup", "/data-deletion", "/policy", "/contact"];
+const PUBLIC_PATHS = ["/", "/privacy", "/terms", "/login", "/signup", "/data-deletion", "/policy", "/contact", "/app-permissions"];
 
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
@@ -71,6 +71,8 @@ export const config = {
         "/signup",
         "/data-deletion",
         "/policy",
+        "/app-permissions",
+        "/contact",
         "/accounts",
         "/campaigns",
         "/google-sheets-export",

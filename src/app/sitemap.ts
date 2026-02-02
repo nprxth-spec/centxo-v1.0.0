@@ -46,5 +46,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 0.3,
         },
+        {
+            url: `${baseUrl}/app-permissions`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.3,
+        },
     ]
 }

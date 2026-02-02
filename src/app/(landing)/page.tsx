@@ -1,15 +1,15 @@
 import { LandingPageClient } from "@/components/landing-page-client";
 
-const PRIVACY_URL = "https://www.centxo.com/privacy";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://centxo.online";
 
 /** JSON-LD for Google OAuth verification + SEO (phone search) */
 function LandingJsonLd() {
   const webApp = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "Centxo",
+    name: "Centxo Digital Solution",
     description: "Facebook and Meta ads management platform. We use Google Sign-In for authentication. We collect email and name solely for account management. We do not share your data with third parties.",
-    url: "https://www.centxo.com",
+    url: BASE_URL,
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     offers: {
@@ -17,15 +17,15 @@ function LandingJsonLd() {
       price: "0",
       priceCurrency: "USD",
     },
-    privacyPolicy: "https://www.centxo.com/privacy",
-    termsOfService: "https://www.centxo.com/terms",
+    privacyPolicy: `${BASE_URL}/privacy`,
+    termsOfService: `${BASE_URL}/terms`,
   };
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Centxo",
+    name: "Centxo Digital Solution",
     legalName: "Narongsak Srikracha",
-    url: "https://www.centxo.com",
+    url: BASE_URL,
     telephone: "+66803787247",
     email: "nprxth@gmail.com",
     description: "Facebook and Meta ads management platform. Manage ad accounts, campaigns, and export to Google Sheets.",
@@ -39,18 +39,19 @@ function LandingJsonLd() {
 }
 
 export async function generateMetadata() {
+  const base = process.env.NEXT_PUBLIC_APP_URL || "https://centxo.online";
   return {
-    title: "Centxo - Facebook/Meta Ads Management Platform | Privacy Policy: www.centxo.com/privacy",
+    title: "Centxo Digital Solution - Facebook/Meta Ads Management Platform | Privacy Policy",
     description:
-      "Centxo is a Facebook/Meta ads management platform. Manage multiple ad accounts, optimize campaigns, and scale advertising. Privacy Policy: https://www.centxo.com/privacy | Terms: https://www.centxo.com/terms",
+      "Centxo Digital Solution is a Facebook/Meta ads management platform. Manage multiple ad accounts, optimize campaigns, and scale advertising. Privacy Policy | Terms | App Permissions | Data Deletion",
     openGraph: {
-      title: "Centxo - Facebook/Meta Ads Management | Privacy: www.centxo.com/privacy",
+      title: "Centxo Digital Solution - Facebook/Meta Ads Management",
       description:
-        "Facebook and Meta advertising management platform. Privacy Policy: https://www.centxo.com/privacy",
+        "Facebook and Meta advertising management platform. Privacy Policy | Terms | App Permissions",
     },
     other: {
-      'privacy-policy': PRIVACY_URL,
-      'terms-of-service': 'https://www.centxo.com/terms',
+      "privacy-policy": `${base}/privacy`,
+      "terms-of-service": `${base}/terms`,
     },
   };
 }
@@ -75,17 +76,19 @@ export default async function LandingPage() {
           borderRadius: '12px',
           fontFamily: 'system-ui, sans-serif'
         }}>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.75rem', color: '#0f172a' }}>Centxo: Facebook and Meta Ads Management Platform</h1>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.75rem', color: '#0f172a' }}>Centxo Digital Solution: Facebook and Meta Ads Management Platform</h1>
           <h2 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.5rem', color: '#334155' }}>Purpose of this Application</h2>
           <p style={{ fontSize: '0.9375rem', lineHeight: 1.6, marginBottom: '0.75rem', color: '#475569' }}>
-            Centxo is a professional platform for managing Facebook and Meta advertising campaigns. We help businesses manage multiple ad accounts, create and optimize campaigns, track performance, and export data to Google Sheets.
+            Centxo Digital Solution is a professional platform for managing Facebook and Meta advertising campaigns. We help businesses manage multiple ad accounts, create and optimize campaigns, track performance, and export data to Google Sheets.
           </p>
           <p style={{ fontSize: '0.9375rem', lineHeight: 1.6, marginBottom: '1rem', color: '#475569' }}>
             <strong style={{ color: '#0f172a' }}>How we use Google data:</strong> When you sign in with Google, we collect your email address and name solely for authentication and account management. We use the Google Sheets API for optional ad data export—we only write to spreadsheets you create or select. We do not share your data with third parties.
           </p>
           <p style={{ fontSize: '0.9375rem', marginTop: '1rem' }}>
-            <a href="https://www.centxo.com/privacy" style={{ color: '#2563eb', textDecoration: 'underline', marginRight: '1rem' }}>Privacy Policy</a>
-            <a href="https://www.centxo.com/terms" style={{ color: '#2563eb', textDecoration: 'underline' }}>Terms of Service</a>
+            <a href={`${BASE_URL}/privacy`} style={{ color: '#2563eb', textDecoration: 'underline', marginRight: '1rem' }}>Privacy Policy</a>
+            <a href={`${BASE_URL}/terms`} style={{ color: '#2563eb', textDecoration: 'underline', marginRight: '1rem' }}>Terms of Service</a>
+            <a href={`${BASE_URL}/app-permissions`} style={{ color: '#2563eb', textDecoration: 'underline', marginRight: '1rem' }}>App Permissions</a>
+            <a href={`${BASE_URL}/data-deletion`} style={{ color: '#2563eb', textDecoration: 'underline' }}>Data Deletion</a>
           </p>
         </div>
       </noscript>
@@ -97,13 +100,25 @@ export default async function LandingPage() {
       </div>
 
       <div className="container px-4 sm:px-6 relative z-10 pt-4 pb-16">
-        {/* Purpose - compact, server-rendered (Google OAuth) */}
-        <section id="app-purpose" className="mb-12 py-4 px-4 rounded-lg border bg-card/40 text-center max-w-2xl mx-auto" aria-label="Application purpose">
-          <p className="text-xs text-muted-foreground leading-relaxed">
-            <strong className="text-foreground/90">Centxo</strong> is a Facebook/Meta ads management platform. We use Google Sign-In for authentication and Google Sheets API for optional ad data export—we collect only your email and name for account management and do not share your data.{" "}
-            <a href="https://www.centxo.com/privacy" className="text-primary hover:underline">Privacy</a>
+        {/* Purpose - prominent, server-rendered (Google OAuth verification) */}
+        <section id="app-purpose" className="mb-12 py-6 px-6 rounded-xl border-2 border-primary/20 bg-card/60 max-w-3xl mx-auto" aria-label="Application purpose">
+          <h2 className="text-lg font-semibold text-foreground mb-3 text-center">
+            Purpose of this Application
+          </h2>
+          <p className="text-sm text-muted-foreground leading-relaxed mb-4 text-center">
+            <strong className="text-foreground/90">Centxo Digital Solution</strong> is a Facebook and Meta ads management platform. We help businesses manage multiple ad accounts, create and optimize campaigns, track performance, and export data to Google Sheets.
+          </p>
+          <p className="text-xs text-muted-foreground leading-relaxed mb-4 text-center">
+            We use Google Sign-In for authentication and Google Sheets API for optional ad data export. We collect only your email and name for account management. We do not share your data with third parties.
+          </p>
+          <p className="text-xs text-center">
+            <a href={`${BASE_URL}/privacy`} className="text-primary hover:underline font-medium">Privacy Policy</a>
             {" · "}
-            <a href="https://www.centxo.com/terms" className="text-primary hover:underline">Terms</a>
+            <a href={`${BASE_URL}/terms`} className="text-primary hover:underline">Terms of Service</a>
+            {" · "}
+            <a href={`${BASE_URL}/app-permissions`} className="text-primary hover:underline">App Permissions</a>
+            {" · "}
+            <a href={`${BASE_URL}/data-deletion`} className="text-primary hover:underline">Data Deletion</a>
           </p>
         </section>
 

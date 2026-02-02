@@ -130,15 +130,19 @@ export default function TermsPage() {
         </section>
 
         <p className="text-sm text-muted-foreground pt-8 border-t mt-8">
-          <a href="https://www.centxo.com" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+          <a href="/" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
             ← Back to Home
           </a>
           {" · "}
-          <a href="https://www.centxo.com/privacy" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+          <a href="/privacy" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
             Privacy Policy
           </a>
           {" · "}
-          <a href="https://www.centxo.com/data-deletion" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+          <a href="/app-permissions" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+            App Permissions
+          </a>
+          {" · "}
+          <a href="/data-deletion" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
             Data Deletion
           </a>
         </p>

@@ -4,9 +4,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import Link from "next/link";
 import { LandingFooter } from "@/components/landing-footer";
 
-/** Google OAuth requires EXACT match - use absolute URLs */
-const PRIVACY_URL = "https://www.centxo.com/privacy";
-const TERMS_URL = "https://www.centxo.com/terms";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://centxo.online";
 
 export default async function LandingLayout({
   children,
@@ -20,8 +18,9 @@ export default async function LandingLayout({
         <div className="container flex h-12 sm:h-14 items-center px-4 sm:px-6">
           <Logo />
           <nav className="ml-auto flex items-center gap-3 sm:gap-5">
-            <a href={PRIVACY_URL} className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
-            <a href={TERMS_URL} className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">Terms</a>
+            <a href={`${BASE_URL}/privacy`} className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a>
+            <a href={`${BASE_URL}/terms`} className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">Terms</a>
+            <Link href="/app-permissions" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">App Permissions</Link>
             <Link href="/login">
               <Button size="sm" className="rounded-lg px-5 h-9 text-sm">Get Started</Button>
             </Link>

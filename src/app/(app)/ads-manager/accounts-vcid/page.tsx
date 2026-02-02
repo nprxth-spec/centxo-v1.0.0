@@ -2,6 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAdAccount } from '@/contexts/AdAccountContext';
 import { AccountsTab } from "@/components/campaigns/AccountsTab";
 import { AccountsByBusinessTab } from "@/components/accounts/AccountsByBusinessTab";
 import { PagesByBusinessTab } from "@/components/accounts/PagesByBusinessTab";
@@ -16,6 +17,7 @@ type TabKey = 'accounts' | 'accounts-by-business' | 'pages-by-business';
 export default function AdsManagerAccountsVcidPage() {
     const { data: session } = useSession();
     const { t } = useLanguage();
+    const { adAccounts, selectedAccounts, loading: configLoading } = useAdAccount();
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
@@ -63,6 +65,10 @@ export default function AdsManagerAccountsVcidPage() {
         setTimeout(() => setLoading(false), 1000);
     };
 
+    // Show AccountsTab when: (1) user has TeamMember connections, OR (2) user has ad accounts from MetaAccount/Settings selection
+    const hasAdAccountsFromConfig = adAccounts.length > 0 || selectedAccounts.length > 0;
+    const canShowAccounts = hasTeamMembers === true || hasAdAccountsFromConfig;
+
     if (hasTeamMembers === null) {
         return (
             <div className="h-full p-4 md:p-6 lg:p-8 flex items-center justify-center">
@@ -71,7 +77,16 @@ export default function AdsManagerAccountsVcidPage() {
         );
     }
 
-    if (!hasTeamMembers) {
+    // When no TeamMembers, wait for config to load (MetaAccount fallback) before showing NoFacebookAccountsPrompt
+    if (!hasTeamMembers && !hasAdAccountsFromConfig && configLoading) {
+        return (
+            <div className="h-full p-4 md:p-6 lg:p-8 flex items-center justify-center">
+                <div className="text-muted-foreground">Loading...</div>
+            </div>
+        );
+    }
+
+    if (!canShowAccounts) {
         return (
             <div className="h-full p-4 md:p-6 lg:p-8">
                 <NoFacebookAccountsPrompt />

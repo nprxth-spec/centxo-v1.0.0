@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { fromBasicUnits } from '@/lib/currency-utils';
+import { decryptToken } from '@/lib/services/metaClient';
 
 // Simple in-memory cache using globalThis to survive HMR in dev
 const CACHE_TTL = 30 * 60 * 1000; // 30 minutes - reduce Meta rate limit usage
@@ -104,7 +105,50 @@ export async function GET(req: NextRequest) {
 
         console.log('[team/ad-accounts] Found team members:', teamMembers.length);
 
-        // If no team members, return empty
+        // Fallback: If no team members, use MetaAccount (from Facebook login) to fetch ad accounts
+        if (teamMembers.length === 0) {
+            const metaAccount = await prisma.metaAccount.findUnique({
+                where: { userId: user.id },
+                select: { id: true, metaUserId: true, accessToken: true, accessTokenExpires: true },
+            });
+
+            let token: string | null = null;
+            const fbName = session.user.name || session.user.email || 'Facebook User';
+
+            if (metaAccount?.accessToken) {
+                try {
+                    token = decryptToken(metaAccount.accessToken);
+                    if (metaAccount.accessTokenExpires && new Date(metaAccount.accessTokenExpires) < new Date()) {
+                        token = null;
+                    }
+                } catch (e) {
+                    console.warn('Failed to decrypt MetaAccount token:', e);
+                }
+            }
+
+            if (!token) {
+                const account = await prisma.account.findFirst({
+                    where: { userId: user.id, provider: 'facebook' },
+                    select: { providerAccountId: true, access_token: true, expires_at: true },
+                });
+                if (account?.access_token && (!account.expires_at || account.expires_at * 1000 > Date.now())) {
+                    token = account.access_token;
+                }
+            }
+
+            if (token) {
+                teamMembers = [{
+                    id: metaAccount?.id || 'fb-login',
+                    facebookUserId: metaAccount?.metaUserId || '',
+                    facebookName: fbName,
+                    facebookEmail: session.user.email || '',
+                    accessToken: token,
+                    accessTokenExpires: metaAccount?.accessTokenExpires || null,
+                }] as any;
+                console.log('[team/ad-accounts] Using MetaAccount fallback for ad accounts');
+            }
+        }
+
         if (teamMembers.length === 0) {
             return NextResponse.json({ accounts: [] });
         }

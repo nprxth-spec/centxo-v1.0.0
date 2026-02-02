@@ -72,7 +72,7 @@ export default function PrivacyPage() {
             You may request deletion of your data at any time:
           </p>
           <ul className="list-disc pl-6 space-y-2 text-foreground mb-4">
-            <li><strong>Facebook/Meta:</strong> Use Facebook&apos;s &quot;Remove&quot; option in your Facebook settings (Settings → Apps and Websites → Centxo → Remove), or visit our <a href="https://www.centxo.com/data-deletion" className="text-blue-600 dark:text-blue-400 underline">Data Deletion</a> page for instructions.</li>
+            <li><strong>Facebook/Meta:</strong> Use Facebook&apos;s &quot;Remove&quot; option in your Facebook settings (Settings → Apps and Websites → Centxo → Remove), or visit our <a href="/data-deletion" className="text-blue-600 dark:text-blue-400 underline">Data Deletion</a> page for instructions.</li>
             <li><strong>Google:</strong> Revoke access in your Google Account settings, or contact us at{" "}
               <a href="mailto:nprxth@gmail.com" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">nprxth@gmail.com</a>
               {" "}to request account deletion.</li>
@@ -101,15 +101,19 @@ export default function PrivacyPage() {
         </div>
 
         <p className="text-sm text-muted-foreground pt-8 border-t mt-8">
-          <a href="https://www.centxo.com" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+          <a href="/" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
             ← Back to Home
           </a>
           {" · "}
-          <a href="https://www.centxo.com/terms" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+          <a href="/terms" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
             Terms of Service
           </a>
           {" · "}
-          <a href="https://www.centxo.com/data-deletion" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+          <a href="/app-permissions" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+            App Permissions
+          </a>
+          {" · "}
+          <a href="/data-deletion" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
             Data Deletion
           </a>
         </p>
