@@ -317,5 +317,5 @@ export const authOptions: NextAuthOptions = {
     },
 
     secret: process.env.NEXTAUTH_SECRET,
-    debug: process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'developer' || process.env.NEXTAUTH_DEBUG === 'true',
+    debug: process.env.NODE_ENV === 'development' || (process.env.NODE_ENV as string) === 'developer' || process.env.NEXTAUTH_DEBUG === 'true',
 };
