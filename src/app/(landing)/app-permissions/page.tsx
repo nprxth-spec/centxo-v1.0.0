@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { LegalPageLayout } from "@/components/legal-page-layout";
 
 export const metadata = {
-  title: "App Permissions - Centxo",
+  title: "App Permissions - Centxo Digital Solution",
   description:
-    "Centxo App Permissions - Google and Meta/Facebook permissions for authentication and ad management.",
+    "Centxo Digital Solution App Permissions - Google and Meta/Facebook permissions for authentication and ad management.",
 };
 
 /**
@@ -12,17 +13,10 @@ export const metadata = {
  */
 export default function AppPermissionsPage() {
   return (
-    <div className="container mx-auto py-12 px-4 max-w-4xl">
-      <h1 className="text-4xl font-bold mb-2 text-center text-foreground">
-        App Permissions
-      </h1>
-      <p className="text-center text-muted-foreground mb-8">
-        Centxo · Google & Meta/Facebook
-      </p>
-
-      <div className="prose prose-slate dark:prose-invert max-w-none space-y-10">
+    <LegalPageLayout title="App Permissions" subtitle="Centxo Digital Solution · Google & Meta/Facebook">
+      <div className="prose prose-slate dark:prose-invert max-w-none space-y-8">
         {/* Google Permissions */}
-        <section className="bg-card border rounded-xl p-6">
+        <section className="bg-muted/50 dark:bg-muted/20 border border-foreground/5 dark:border-white/10 rounded-2xl p-6">
           <h2 className="text-2xl font-semibold text-foreground mb-4">
             Google Permissions
           </h2>
@@ -46,7 +40,7 @@ export default function AppPermissionsPage() {
               href="https://developers.google.com/terms/api-services-user-data-policy"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 underline hover:no-underline"
+              className="text-amber-600 dark:text-amber-400 underline hover:no-underline"
             >
               Google API Services User Data Policy
             </a>
@@ -55,7 +49,7 @@ export default function AppPermissionsPage() {
               href="https://myaccount.google.com/permissions"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 underline hover:no-underline"
+              className="text-amber-600 dark:text-amber-400 underline hover:no-underline"
             >
               Google Account settings
             </a>
@@ -64,7 +58,7 @@ export default function AppPermissionsPage() {
         </section>
 
         {/* Meta/Facebook Permissions */}
-        <section className="bg-card border rounded-xl p-6">
+        <section className="bg-muted/50 dark:bg-muted/20 border border-foreground/5 dark:border-white/10 rounded-2xl p-6">
           <h2 className="text-2xl font-semibold text-foreground mb-4">
             Meta / Facebook Permissions
           </h2>
@@ -91,36 +85,18 @@ export default function AppPermissionsPage() {
               href="https://www.facebook.com/settings?tab=applications"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 underline hover:no-underline"
+              className="text-amber-600 dark:text-amber-400 underline hover:no-underline"
             >
               Facebook Settings
             </a>
             {" "}or visit our{" "}
-            <Link href="/data-deletion" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+            <Link href="/data-deletion" className="text-amber-600 dark:text-amber-400 underline hover:no-underline">
               Data Deletion
             </Link>
             {" "}page.
           </p>
         </section>
-
-        <p className="text-sm text-muted-foreground pt-6 border-t">
-          <Link href="/" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
-            ← Back to Home
-          </Link>
-          {" · "}
-          <Link href="/privacy" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
-            Privacy Policy
-          </Link>
-          {" · "}
-          <Link href="/terms" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
-            Terms of Service
-          </Link>
-          {" · "}
-          <Link href="/data-deletion" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
-            Data Deletion
-          </Link>
-        </p>
       </div>
-    </div>
+    </LegalPageLayout>
   );
 }

@@ -15,22 +15,26 @@ export const authOptions: NextAuthOptions = {
 
     events: {
         async signIn({ user, account, profile, isNewUser }) {
-            const provider = account?.provider;
-            let action: 'LOGIN_GOOGLE' | 'LOGIN_PASSWORD' | 'LOGIN_ADMIN' | 'LOGIN_FACEBOOK' = 'LOGIN_PASSWORD';
-            if (provider === 'google') action = 'LOGIN_GOOGLE';
-            else if (provider === 'facebook') action = 'LOGIN_FACEBOOK';
-            else if (provider === 'credentials') {
-                action = (user as { loginType?: string }).loginType === 'admin' ? 'LOGIN_ADMIN' : 'LOGIN_PASSWORD';
-            }
-            await createAuditLog({
-                userId: user.id,
-                action,
-                details: {
-                    provider,
-                    isNewUser,
-                    email: user.email
+            try {
+                const provider = account?.provider;
+                let action: 'LOGIN_GOOGLE' | 'LOGIN_PASSWORD' | 'LOGIN_ADMIN' | 'LOGIN_FACEBOOK' = 'LOGIN_PASSWORD';
+                if (provider === 'google') action = 'LOGIN_GOOGLE';
+                else if (provider === 'facebook') action = 'LOGIN_FACEBOOK';
+                else if (provider === 'credentials') {
+                    action = (user as { loginType?: string }).loginType === 'admin' ? 'LOGIN_ADMIN' : 'LOGIN_PASSWORD';
                 }
-            });
+                await createAuditLog({
+                    userId: user.id,
+                    action,
+                    details: {
+                        provider,
+                        isNewUser,
+                        email: user.email
+                    }
+                });
+            } catch (e) {
+                console.error('[Auth] signIn event audit log failed:', e);
+            }
         },
     },
 
@@ -313,5 +317,5 @@ export const authOptions: NextAuthOptions = {
     },
 
     secret: process.env.NEXTAUTH_SECRET,
-    debug: process.env.NODE_ENV === 'development',
+    debug: process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'developer' || process.env.NEXTAUTH_DEBUG === 'true',
 };

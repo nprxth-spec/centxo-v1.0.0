@@ -1,8 +1,8 @@
-import Link from "next/link";
+import { LegalPageLayout } from "@/components/legal-page-layout";
 
 export const metadata = {
-  title: "Terms of Service - Centxo",
-  description: "Terms of Service for Centxo - Facebook and Meta ads management platform.",
+  title: "Terms of Service - Centxo Digital Solution",
+  description: "Terms of Service for Centxo Digital Solution - Facebook and Meta ads management platform.",
 };
 
 /**
@@ -11,23 +11,16 @@ export const metadata = {
  */
 export default function TermsPage() {
   return (
-    <div className="container mx-auto py-12 px-4 max-w-4xl">
-      <h1 className="text-4xl font-bold mb-2 text-center text-foreground">
-        Terms of Service
-      </h1>
-      <p className="text-center text-muted-foreground mb-8">
-        Centxo · Narongsak Srikracha
-      </p>
-
+    <LegalPageLayout title="Terms of Service" subtitle="Centxo Digital Solution · Narongsak Srikracha">
       <div className="space-y-8 prose prose-slate dark:prose-invert max-w-none">
-        <div className="bg-green-50 dark:bg-green-950/30 border-2 border-green-300 dark:border-green-700 rounded-lg p-8">
+        <div className="bg-primary/5 dark:bg-primary/10 border border-primary/20 dark:border-primary/30 rounded-2xl p-6">
           <p className="text-lg text-foreground leading-relaxed mb-2">
             By using Centxo, you agree to these Terms of Service. We provide Facebook and Meta 
             advertising management tools. You are responsible for your account security and for 
             complying with Facebook's advertising policies.
           </p>
           <p className="text-base text-foreground">
-            <strong>Legal entity:</strong> Narongsak Srikracha · <strong>Tel:</strong> <a href="tel:+66803787247" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">+66 80 378 7247</a>
+            <strong>Legal entity:</strong> Narongsak Srikracha · <strong>Tel:</strong> <a href="tel:+66803787247" className="text-amber-600 dark:text-amber-400 underline hover:no-underline">+66 80 378 7247</a>
           </p>
         </div>
 
@@ -86,7 +79,7 @@ export default function TermsPage() {
           </h2>
           <p className="text-foreground leading-relaxed">
             Your privacy is important to us. Please review our{" "}
-            <a href="https://www.centxo.com/privacy" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
+            <a href="/privacy" className="text-amber-600 dark:text-amber-400 underline hover:no-underline">
               Privacy Policy
             </a>{" "}
             to understand how we collect and use your information.
@@ -122,31 +115,13 @@ export default function TermsPage() {
             If you have any questions about these Terms of Service, please contact us at{" "}
             <a
               href="mailto:nprxth@gmail.com"
-              className="text-blue-600 dark:text-blue-400 underline hover:no-underline font-semibold"
+              className="text-amber-600 dark:text-amber-400 underline hover:no-underline font-semibold"
             >
               nprxth@gmail.com
             </a>
           </p>
         </section>
-
-        <p className="text-sm text-muted-foreground pt-8 border-t mt-8">
-          <a href="/" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
-            ← Back to Home
-          </a>
-          {" · "}
-          <a href="/privacy" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
-            Privacy Policy
-          </a>
-          {" · "}
-          <a href="/app-permissions" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
-            App Permissions
-          </a>
-          {" · "}
-          <a href="/data-deletion" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
-            Data Deletion
-          </a>
-        </p>
       </div>
-    </div>
+    </LegalPageLayout>
   );
 }
