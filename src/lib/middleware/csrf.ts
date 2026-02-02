@@ -9,11 +9,14 @@ import crypto from 'crypto';
 const CSRF_TOKEN_HEADER = 'x-csrf-token';
 const CSRF_COOKIE_NAME = 'csrf-token';
 
-// Use NEXTAUTH_SECRET for CSRF - must be set in production
-if (process.env.NODE_ENV === 'production' && !process.env.NEXTAUTH_SECRET) {
-    throw new Error('NEXTAUTH_SECRET must be set in production for CSRF protection');
-}
 const CSRF_SECRET = process.env.NEXTAUTH_SECRET || 'dev-secret-not-for-production';
+
+// Lazy validation at runtime (not build) - allows build to succeed
+function validateSecret(): void {
+    if (process.env.NODE_ENV === 'production' && !process.env.NEXTAUTH_SECRET) {
+        throw new Error('NEXTAUTH_SECRET must be set in production for CSRF protection');
+    }
+}
 
 /**
  * Generate a CSRF token
@@ -53,6 +56,7 @@ export function verifyCsrfToken(request: NextRequest): boolean {
  * @returns Response if CSRF check fails, null otherwise
  */
 export function csrfProtection(request: NextRequest): NextResponse | null {
+    validateSecret();
     const isValid = verifyCsrfToken(request);
 
     if (!isValid) {
@@ -73,6 +77,7 @@ export function csrfProtection(request: NextRequest): NextResponse | null {
  * Call this in API routes that need CSRF protection
  */
 export function addCsrfToken(response: NextResponse): NextResponse {
+    validateSecret();
     const token = generateCsrfToken();
 
     // Set cookie
