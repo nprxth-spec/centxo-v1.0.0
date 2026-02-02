@@ -8,20 +8,20 @@ import crypto from 'crypto';
 const GRAPH_API_VERSION = process.env.GRAPH_API_VERSION || 'v21.0';
 const GRAPH_API_BASE = `https://graph.facebook.com/${GRAPH_API_VERSION}`;
 
-// Encryption for storing tokens
+// Encryption for storing tokens (lazy validation at runtime, not build)
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'default-key-change-in-production';
 
-// Validate encryption key in production
-if (process.env.NODE_ENV === 'production' && ENCRYPTION_KEY === 'default-key-change-in-production') {
-  throw new Error(
-    '❌ CRITICAL SECURITY ERROR: ENCRYPTION_KEY is using default value in production!\n' +
-    'Generate a secure key with: node -e "console.log(require(\'crypto\').randomBytes(32).toString(\'hex\'))"\n' +
-    'Then set it in your environment variables.'
-  );
-}
-
-if (ENCRYPTION_KEY.length < 32) {
-  console.warn('⚠️ WARNING: ENCRYPTION_KEY should be at least 32 characters for optimal security');
+function validateEncryptionKey(): void {
+  if (process.env.NODE_ENV === 'production' && ENCRYPTION_KEY === 'default-key-change-in-production') {
+    throw new Error(
+      '❌ CRITICAL SECURITY ERROR: ENCRYPTION_KEY is using default value in production!\n' +
+      'Generate a secure key with: node -e "console.log(require(\'crypto\').randomBytes(32).toString(\'hex\'))"\n' +
+      'Then set it in your environment variables.'
+    );
+  }
+  if (ENCRYPTION_KEY.length < 32) {
+    console.warn('⚠️ WARNING: ENCRYPTION_KEY should be at least 32 characters for optimal security');
+  }
 }
 
 // Derive a proper 32-byte key using PBKDF2 (more secure than padding)
@@ -34,6 +34,7 @@ const DERIVED_KEY = crypto.pbkdf2Sync(
 );
 
 export function encryptToken(token: string): string {
+  validateEncryptionKey();
   const iv = crypto.randomBytes(16);
   const cipher = crypto.createCipheriv('aes-256-cbc', DERIVED_KEY, iv);
   let encrypted = cipher.update(token, 'utf8', 'hex');
@@ -45,6 +46,7 @@ export function encryptToken(token: string): string {
 const LEGACY_KEY = Buffer.from(ENCRYPTION_KEY.padEnd(32, '0').slice(0, 32));
 
 export function decryptToken(encryptedToken: string): string {
+  validateEncryptionKey();
   const parts = encryptedToken.split(':');
   if (parts.length !== 2) {
     throw new Error('Invalid encrypted token format');
